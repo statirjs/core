@@ -1,5 +1,5 @@
 {
-  "name": "statux",
+  "name": "statir",
   "version": "0.1.1",
   "description": "Minimalistic state manager",
   "main": "./src/index.ts",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bre30kra69cs/statux.git"
+    "url": "git+https://github.com/bre30kra69cs/statir.git"
   },
   "keywords": [
     "state",
@@ -21,9 +21,9 @@
   "author": "Andrey Krasovsky",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bre30kra69cs/statux/issues"
+    "url": "https://github.com/bre30kra69cs/statir/issues"
   },
-  "homepage": "https://github.com/bre30kra69cs/statux#readme",
+  "homepage": "https://github.com/bre30kra69cs/statir#readme",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
