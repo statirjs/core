@@ -1,0 +1,3 @@
+# STATUS
+
+Minimalistic state manager

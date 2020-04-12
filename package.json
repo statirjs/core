@@ -1,0 +1,24 @@
+{
+  "name": "statux",
+  "version": "0.1.0",
+  "description": "Minimalistic state manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bre30kra69cs/statux.git"
+  },
+  "keywords": [
+    "state",
+    "manager",
+    "javascript"
+  ],
+  "author": "Andrey Krasovsky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bre30kra69cs/statux/issues"
+  },
+  "homepage": "https://github.com/bre30kra69cs/statux#readme"
+}
