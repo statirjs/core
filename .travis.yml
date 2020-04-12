@@ -1,5 +1,4 @@
 language: node_js
-cache: npm
 script:
   - npm run prettier:check
   - npm run eslint:check

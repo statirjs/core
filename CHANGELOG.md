@@ -7,3 +7,4 @@
 5. Init eslint
 6. Init git hooks
 7. Init typescript
+8. Init travis ci
