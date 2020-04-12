@@ -1,4 +1,4 @@
-# statir
+# STATIR
 
 [![Build Status](https://travis-ci.com/bre30kra69cs/statir.svg?branch=dev)](https://travis-ci.com/bre30kra69cs/statir)
 
