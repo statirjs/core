@@ -1,3 +1,3 @@
-# STATUS
+# STATUX
 
 Minimalistic state manager

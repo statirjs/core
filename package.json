@@ -2,9 +2,13 @@
   "name": "statux",
   "version": "0.1.0",
   "description": "Minimalistic state manager",
-  "main": "index.js",
+  "main": "./src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prettier:write": "npx prettier --write src/**/*",
+    "prettier:check": "npx prettier --check src/**/*",
+    "eslint:check": "npx eslint --ext .ts src/**/*",
+    "typescript:build": "npx tsc",
+    "typescript:check": "npx tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -12,13 +16,22 @@
   },
   "keywords": [
     "state",
-    "manager",
-    "javascript"
+    "manager"
   ],
   "author": "Andrey Krasovsky",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/bre30kra69cs/statux/issues"
   },
-  "homepage": "https://github.com/bre30kra69cs/statux#readme"
+  "homepage": "https://github.com/bre30kra69cs/statux#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^4.2.5",
+    "prettier": "^2.0.4",
+    "typescript": "^3.8.3"
+  }
 }
