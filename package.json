@@ -1,6 +1,6 @@
 {
   "name": "statux",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Minimalistic state manager",
   "main": "./src/index.ts",
   "scripts": {
