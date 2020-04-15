@@ -5,6 +5,10 @@
 
 Minimalistic state manager
 
+## Roadmap
+
+[ROADMAP](ROADMAP.md)
+
 ## Change Log
 
 [CHANGELOG](CHANGELOG.md)
