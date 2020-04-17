@@ -9,7 +9,9 @@
     "eslint:check": "npx eslint --ext .ts src",
     "typescript:build": "npx tsc",
     "typescript:check": "npx tsc --noEmit",
-    "rollup:build": "npx rollup -c"
+    "typescript:types": "npx tsc --emitDeclarationOnly",
+    "rollup:build": "npx rollup -c",
+    "jest:test": "npx jest tests"
   },
   "repository": {
     "type": "git",
@@ -29,12 +31,14 @@
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-typescript": "^7.9.0",
+    "@types/jest": "^25.2.1",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-prettier": "^3.1.2",
     "husky": "^4.2.5",
+    "jest": "^25.3.0",
     "prettier": "^2.0.4",
     "rollup": "^2.6.1",
     "rollup-plugin-babel": "^4.4.0",

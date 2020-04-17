@@ -3,6 +3,8 @@
     "baseUrl": ".",
     "outDir": "dist",
     "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "lib": ["ESNext", "DOM"],
     "allowJs": true,
     "checkJs": true,
@@ -11,8 +13,9 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": false,
+    "declarationDir": "types",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true
   },
-  "include": ["src"]
+  "include": ["src", "tests"]
 }

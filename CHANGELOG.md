@@ -2,17 +2,24 @@
 
 ## Project
 
-1. Init rollup
+2. Tests initiated
 
-# April 12, 2019
+# 9.1.4 (April 17, 2020)
 
 ## Project
 
-1. Init metadata files
-2. Init npm
-3. Init prettier
-4. Init editorconfig
-5. Init eslint
-6. Init git hooks
-7. Init typescript
-8. Init travis ci
+1. Rollup initiated
+2. Babel initiated
+
+# 0.1.3 (April 12, 2020)
+
+## Project
+
+1. Metadata files initiated
+2. Npm initiated
+3. Prettier initiated
+4. Editorconfig initiated
+5. Eslint initiated
+6. Git hooks initiated
+7. Typescript initiated
+8. Travis ci initiated

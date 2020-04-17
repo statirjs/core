@@ -1,6 +1,7 @@
 # DIRS
 dist
 build
+types
 node_modules
 
 # FILES

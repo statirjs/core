@@ -4,4 +4,4 @@
 - [x] Add rollup bundler
 - [x] Add babel
 - [ ] Edit pull request ci
-- [ ] Init tests
+- [x] Init tests
