@@ -9,7 +9,7 @@
     "eslint:check": "npx eslint --ext .ts src",
     "typescript:build": "npx tsc",
     "typescript:check": "npx tsc --noEmit",
-    "rollup:build": "npx rollup"
+    "rollup:build": "npx rollup -c"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,9 @@
   },
   "homepage": "https://github.com/bre30kra69cs/statir#readme",
   "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-typescript": "^7.9.0",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
     "eslint": "^6.8.0",
@@ -34,6 +37,7 @@
     "husky": "^4.2.5",
     "prettier": "^2.0.4",
     "rollup": "^2.6.1",
+    "rollup-plugin-babel": "^4.4.0",
     "typescript": "^3.8.3"
   }
 }

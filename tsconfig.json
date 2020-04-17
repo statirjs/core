@@ -8,6 +8,7 @@
     "checkJs": true,
     "sourceMap": true,
     "declaration": true,
+    "skipLibCheck": true,
     "strict": true,
     "noEmit": false,
     "allowSyntheticDefaultImports": true,

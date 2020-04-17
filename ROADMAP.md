@@ -1,7 +1,7 @@
-# MILESTONE v2.0.0
+# MILESTONE v0.2.0
 
 - [ ] Create project icon
 - [x] Add rollup bundler
-- [ ] Add babel
+- [x] Add babel
 - [ ] Edit pull request ci
 - [ ] Init tests
