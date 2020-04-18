@@ -5,3 +5,5 @@
 - [x] Add babel
 - [ ] Edit pull request ci
 - [x] Init tests
+- [x] Create @statir organization
+- [ ] Rebase statir to @statir/core
