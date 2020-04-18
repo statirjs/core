@@ -6,4 +6,5 @@
 - [ ] Edit pull request ci
 - [x] Init tests
 - [x] Create @statir organization
-- [ ] Rebase statir to @statir/core
+- [x] Rebase statir to @statir/core
+- [ ] Rebase npm statir to @statir/core
