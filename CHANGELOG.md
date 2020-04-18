@@ -4,6 +4,8 @@
 
 1. Tests initiated
 2. Added logo
+3. Renamed to statirjsc/core
+4. Rebased to @statirjs/core
 
 # 0.1.4 (April 17, 2020)
 

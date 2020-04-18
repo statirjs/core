@@ -3,7 +3,13 @@
 [![build status](https://travis-ci.com/statirjs/core.svg?branch=dev)](https://travis-ci.com/github/statirjs/core)
 [![npm version](https://img.shields.io/npm/v/@statirjs/core)](https://www.npmjs.com/package/@statirjs/core)
 
-Statirjs is a minimalistic state manager
+"statirjs/core" is a minimalistic, framework/platform agnostic state manager
+
+## How to install?
+
+```
+npm i @statirjs/core
+```
 
 ## Roadmap
 
