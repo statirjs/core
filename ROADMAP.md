@@ -7,4 +7,5 @@
 - [x] Init tests
 - [x] Create @statir organization
 - [x] Rebase statir to @statir/core
-- [ ] Rebase npm statir to @statir/core
+- [x] Rebase npm statir to @statir/core
+- [x] Rename statir to statirjs

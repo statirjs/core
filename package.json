@@ -1,6 +1,6 @@
 {
-  "name": "statir",
-  "version": "0.1.2",
+  "name": "@statirjs/core",
+  "version": "0.1.0",
   "description": "Minimalistic state manager",
   "main": "./src/index.ts",
   "scripts": {
@@ -15,18 +15,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bre30kra69cs/statir.git"
+    "url": "git+https://github.com/statirjs/core.git"
   },
   "keywords": [
+    "@statirjs",
+    "statirjs",
+    "javascript",
+    "typescript",
     "state",
     "manager"
   ],
   "author": "Andrey Krasovsky <an.krasowsckij@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bre30kra69cs/statir/issues"
+    "url": "https://github.com/statirjs/core/issues"
   },
-  "homepage": "https://github.com/bre30kra69cs/statir#readme",
+  "homepage": "https://github.com/statirjs/core#readme",
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",

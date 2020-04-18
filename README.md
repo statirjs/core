@@ -1,9 +1,9 @@
-# <img src='https://raw.githubusercontent.com/statir/core/dev/logo/statir_text.png' height='100' alt='Statir Logo' aria-label='statir.js.org' />
+# <img src='https://raw.githubusercontent.com/statirjs/core/dev/logo/statirjs_text.png' height='100' alt='Statirjs Logo' aria-label='statirjs' />
 
-[![build status](https://travis-ci.com/bre30kra69cs/statir.svg?branch=dev)](https://travis-ci.com/bre30kra69cs/statir)
-[![npm version](https://img.shields.io/npm/v/statir.svg)](https://www.npmjs.com/package/statir)
+[![build status](https://travis-ci.com/statirjs/core.svg?branch=dev)](https://travis-ci.com/bre30kra69cs/statirjs)
+[![npm version](https://img.shields.io/npm/v/@statirjs/core)](https://www.npmjs.com/package/statirjs)
 
-Statir is a minimalistic state manager
+Statirjs is a minimalistic state manager
 
 ## Roadmap
 
