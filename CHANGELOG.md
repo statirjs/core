@@ -2,9 +2,10 @@
 
 ## Project
 
-2. Tests initiated
+1. Tests initiated
+2. Added logo
 
-# 9.1.4 (April 17, 2020)
+# 0.1.4 (April 17, 2020)
 
 ## Project
 
