@@ -2,10 +2,18 @@
 
 ## Project
 
+# 0.2.0 (April 19, 2020)
+
+## Project
+
 1. Tests initiated
 2. Added logo
 3. Renamed to statirjsc/core
 4. Rebased to @statirjs/core
+5. Updated output module type
+6. Added after prepublish build
+7. Added auto publish on dev
+8. Added cjs output
 
 # 0.1.4 (April 17, 2020)
 

@@ -2,9 +2,10 @@
   "name": "@statirjs/core",
   "version": "0.1.29",
   "description": "Minimalistic state manager",
-  "main": "./build/index.ts",
+  "main": "./build/index.js",
   "types": "./types",
   "scripts": {
+    "project:clean": "npx rimraf build dist types",
     "prettier:write": "npx prettier --write src",
     "prettier:check": "npx prettier --check src",
     "eslint:check": "npx eslint --ext .ts src",
@@ -46,6 +47,7 @@
     "husky": "^4.2.5",
     "jest": "^25.3.0",
     "prettier": "^2.0.4",
+    "rifraf": "^2.0.3",
     "rollup": "^2.6.1",
     "rollup-plugin-babel": "^4.4.0",
     "typescript": "^3.8.3"

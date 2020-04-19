@@ -13,12 +13,12 @@ npm i @statirjs/core
 
 ## Roadmap
 
-[ROADMAP](ROADMAP.md)
+[ROADMAP](https://github.com/statirjs/core/blob/dev/ROADMAP.md)
 
 ## Change Log
 
-[CHANGELOG](CHANGELOG.md)
+[CHANGELOG](https://github.com/statirjs/core/blob/dev/CHANGELOG.md)
 
 ## License
 
-[MIT](LICENSE.md)
+[MIT](https://github.com/statirjs/core/blob/dev/LICENSE.md)
