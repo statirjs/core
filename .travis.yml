@@ -6,18 +6,22 @@ jobs:
   include:
     - stage: test
       language: node_js
-      script: npm run prettier:check
-      script: npm run eslint:check
-      script: npm run typescript:check
-      script: npm run jest:test
+      script:
+        - npm run prettier:check
+        - npm run eslint:check
+        - npm run typescript:check
+        - npm run jest:test
     - stage: deploy
       language: node_js
       if:
         - tag IS present
         - branch IS dev
-      script: npm run rollup:build
-      script: npm run typescript:types
+      script:
+        - npm run rollup:build
+        - npm run typescript:types
       deploy:
         provider: npm
         email: '$NPM_EMAIL'
         api_key: '$NPM_API_KEY'
+        on:
+          tags: true
