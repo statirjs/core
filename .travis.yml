@@ -19,7 +19,8 @@ jobs:
     - stage: deploy
       if:
         - tag IS present
-      script:
+      script: skip
+      before_deploy:
         - npm run rollup:build
         - npm run typescript:types
       deploy:
