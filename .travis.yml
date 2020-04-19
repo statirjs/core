@@ -12,8 +12,8 @@ jobs:
       if: tag IS present
       deploy:
         provider: npm
-        email: 'NPM_EMAIL'
-        api_key: 'NPM_API_KEY'
+        email: '$NPM_EMAIL'
+        api_key: '$NPM_API_KEY'
         on:
           branch: dev
           tags: true
