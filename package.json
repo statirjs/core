@@ -1,6 +1,6 @@
 {
   "name": "@statirjs/core",
-  "version": "0.1.26",
+  "version": "0.1.27",
   "description": "Minimalistic state manager",
   "main": "./src/index.ts",
   "scripts": {
