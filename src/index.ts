@@ -3,5 +3,5 @@ export function hello(): string {
 }
 
 export function help(): string {
-  return 'HELP ME PLS!';
+  return 'HELP ME PLS PATCH!';
 }
