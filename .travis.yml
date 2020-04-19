@@ -18,14 +18,13 @@ jobs:
         - npm run jest:test
     - stage: deploy
       if:
-        - tag IS present
-        - branch IS dev
+        - tag IS present AND branch IS dev
       script:
         - npm run rollup:build
         - npm run typescript:types
       deploy:
         provider: npm
-        skip_cleanup: true
+        cleanup: false
         email: '$NPM_EMAIL'
         api_token: '$NPM_API_TOKEN'
         on:
