@@ -12,8 +12,7 @@ jobs:
       script: npm run typescript:check
       script: npm run jest:test
     - stage: deploy
-      script: skip
-      if: tag IS present
+      script: npm run rollup:build
       deploy:
         provider: npm
         email: '$NPM_EMAIL'
