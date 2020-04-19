@@ -6,7 +6,8 @@ script:
   - npm run jest:test
 deploy:
   provider: npm
-  email: 'statir.org@gmail.com'
+  email: 'NPM_EMAIL'
   api_key: 'NPM_API_KEY'
   on:
     branch: dev
+    tags: true
