@@ -1,13 +1,19 @@
 language: node_js
-script:
-  - npm run prettier:check
-  - npm run eslint:check
-  - npm run typescript:check
-  - npm run jest:test
-deploy:
-  provider: npm
-  email: 'NPM_EMAIL'
-  api_key: 'NPM_API_KEY'
-  on:
-    branch: dev
-    tags: true
+jobs:
+  include:
+    - stage: test
+      script:
+        - npm run prettier:check
+        - npm run eslint:check
+        - npm run typescript:check
+        - npm run jest:test
+    - stage: deploy
+      script: skip
+      if: tag IS present
+      deploy:
+        provider: npm
+        email: 'NPM_EMAIL'
+        api_key: 'NPM_API_KEY'
+        on:
+          branch: dev
+          tags: true
