@@ -18,7 +18,7 @@ jobs:
         - npm run jest:test
     - stage: deploy
       if:
-        - tag IS present AND branch IS dev
+        - branch IS dev
       script:
         - npm run rollup:build
         - npm run typescript:types
