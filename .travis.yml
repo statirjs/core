@@ -12,12 +12,12 @@ jobs:
       script: npm run jest:test
     - stage: deploy
       language: node_js
-      if: tag IS present
+      if:
+        - tag IS present
+        - branch IS dev
       script: npm run rollup:build
       script: npm run typescript:types
       deploy:
         provider: npm
         email: '$NPM_EMAIL'
         api_key: '$NPM_API_KEY'
-        on:
-          branch: dev
