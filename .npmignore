@@ -1,6 +1,5 @@
 # DIRS
-build
-types
+dist
 tests
 logo
 node_modules
@@ -9,6 +8,7 @@ node_modules
 .DB_Store
 .editorconfig
 .eslintrc
+.eslintignore
 .huskyrc
 .nvmrc
 .prettierrc

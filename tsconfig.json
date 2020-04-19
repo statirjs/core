@@ -10,12 +10,12 @@
     "checkJs": true,
     "sourceMap": true,
     "declaration": true,
+    "declarationDir": "types",
     "skipLibCheck": true,
     "strict": true,
     "noEmit": false,
-    "declarationDir": "types",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true
   },
-  "include": ["src", "tests"]
+  "include": ["src"]
 }
