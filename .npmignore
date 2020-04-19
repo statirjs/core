@@ -12,6 +12,7 @@ node_modules
 .huskyrc
 .nvmrc
 .prettierrc
+.prettierignore
 .travis.yml
 babel.config.json
 jest.config.js
