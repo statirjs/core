@@ -1,5 +1,4 @@
 # DIRS
-dist
 build
 types
 tests
@@ -18,3 +17,6 @@ babel.config.json
 jest.config.js
 rollup.config.js
 tsconfig.json
+ROADMAP.md
+CHANGELOG.md
+AUTHORS.md

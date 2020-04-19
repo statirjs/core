@@ -1,5 +1,3 @@
-language: node_js
-
 stages:
   - test
   - deploy
@@ -7,15 +5,19 @@ stages:
 jobs:
   include:
     - stage: test
+      language: node_js
       script: npm run prettier:check
       script: npm run eslint:check
       script: npm run typescript:check
       script: npm run jest:test
     - stage: deploy
+      language: node_js
       script: npm run rollup:build
+      script: npm run typescript:types
       deploy:
         provider: npm
         email: '$NPM_EMAIL'
         api_key: '$NPM_API_KEY'
         on:
           branch: dev
+          tags: true
