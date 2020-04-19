@@ -12,6 +12,7 @@ jobs:
       script: npm run jest:test
     - stage: deploy
       language: node_js
+      if: tag IS present
       script: npm run rollup:build
       script: npm run typescript:types
       deploy:
@@ -20,4 +21,3 @@ jobs:
         api_key: '$NPM_API_KEY'
         on:
           branch: dev
-          tags: true
