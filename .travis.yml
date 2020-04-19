@@ -4,3 +4,9 @@ script:
   - npm run eslint:check
   - npm run typescript:check
   - npm run jest:test
+deploy:
+  provider: npm
+  email: 'statir.org@gmail.com'
+  api_key: 'NPM_API_KEY'
+  on:
+    branch: dev

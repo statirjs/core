@@ -11,7 +11,8 @@
     "typescript:check": "npx tsc --noEmit",
     "typescript:types": "npx tsc --emitDeclarationOnly",
     "rollup:build": "npx rollup -c",
-    "jest:test": "npx jest tests"
+    "jest:test": "npx jest tests",
+    "prepublishOnly": "npm run prettier:check && npm run eslint:check && npm run typescript:check && npm run jest:test"
   },
   "repository": {
     "type": "git",
@@ -47,5 +48,9 @@
     "rollup": "^2.6.1",
     "rollup-plugin-babel": "^4.4.0",
     "typescript": "^3.8.3"
+  },
+  "dependencies": {},
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -1,0 +1,20 @@
+# DIRS
+dist
+build
+types
+tests
+logo
+node_modules
+
+# FILES
+.DB_Store
+.editorconfig
+.eslintrc
+.huskyrc
+.nvmrc
+.prettierrc
+.travis.yml
+babel.config.json
+jest.config.js
+rollup.config.js
+tsconfig.json

@@ -9,3 +9,9 @@
 - [x] Rebase statir to @statir/core
 - [x] Rebase npm statir to @statir/core
 - [x] Rename statir to statirjs
+- [ ] Add dev/prod rollup config
+- [ ] Add dev/prod babel config
+- [ ] Add prod minification
+- [ ] Update output module type
+- [ ] Add after install package build
+- [ ] Add auto publish on dev
