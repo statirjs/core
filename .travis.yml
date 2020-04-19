@@ -25,8 +25,8 @@ jobs:
         - npm run typescript:types
       deploy:
         provider: npm
+        skip_cleanup: true
         email: '$NPM_EMAIL'
         api_token: '$NPM_API_TOKEN'
-        edge: true
         on:
           tags: true
