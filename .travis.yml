@@ -1,5 +1,7 @@
 language: node_js
 
+cache: npm
+
 stages:
   - test
   - deploy
@@ -21,7 +23,7 @@ jobs:
         - npm run typescript:types
       deploy:
         provider: npm
-        email: $NPM_EMAIL
-        api_key: $NPM_API_KEY
+        email: NPM_EMAIL
+        api_key: NPM_API_KEY
         on:
           tags: true
