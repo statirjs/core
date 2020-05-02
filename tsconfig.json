@@ -12,6 +12,7 @@
     "declaration": true,
     "declarationDir": "types",
     "skipLibCheck": true,
+    "noImplicitAny": true,
     "strict": true,
     "noEmit": false,
     "allowSyntheticDefaultImports": true,

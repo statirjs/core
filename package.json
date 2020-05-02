@@ -52,7 +52,9 @@
     "rollup-plugin-babel": "^4.4.0",
     "typescript": "^3.8.3"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@rematch/core": "^1.4.0"
+  },
   "publishConfig": {
     "access": "public"
   }
