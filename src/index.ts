@@ -1,3 +1,5 @@
+type IDispatch = any;
+
 interface IWorkLine<T = any, K extends any = any, P extends any = any> {
   push: (state: T, payload: P) => T;
   core?: (state: T, payload: P) => K;
@@ -15,14 +17,9 @@ interface IPieceOfStore<T extends any = any> {
   workLines?: IWorkLines<T>;
 }
 
-type IPieceOfStoreBuilder<T> = (dispatch: any) => T;
+type IPieceOfStoreBuilder<T> = (dispatch: IDispatch) => T;
 
-type IParsedPiceOfStoreSubscribe<T> = (state: T) => void;
-
-interface IParsedPiceOfStoreSubscribeItem<T> {
-  id: string;
-  subscriber: IParsedPiceOfStoreSubscribe<T>;
-}
+type IParsedPiceOfStoreSubscribe<T extends any = any> = (state: T) => void;
 
 type IParsedWorkLine<T extends string, P extends any> = P[T] extends () => void
   ? null
@@ -46,54 +43,185 @@ type IParsedWorkLines<T extends IPieceOfStore['workLines']> = {
   [x in keyof T]: IParseWorkLine<T[x]>;
 };
 
+type IExtractWorkLinesStatus<T extends IPieceOfStore['workLines']> = {
+  [x in keyof T]: {
+    isLoading: boolean;
+    isError: boolean;
+  };
+};
+
 interface IParsedPieceOfStore<T extends IPieceOfStore, K = T['state']> {
-  state: K;
+  state: K & IExtractWorkLinesStatus<T['workLines']>;
   name: T['name'];
   workLines: IParsedWorkLines<T['workLines']>;
-  subscribers: IParsedPiceOfStoreSubscribeItem<K>[];
-  getState(): K;
-  subscribe(subscriber: IParsedPiceOfStoreSubscribe<T>): string;
-  unsubscribe(id: string): void;
+  subscribers: IParsedPiceOfStoreSubscribe<K>[];
+  subscribe(subscriber: IParsedPiceOfStoreSubscribe<K>): void;
 }
 
-type IParsedPieceOfStoreBuilder<T extends IPieceOfStore> = (
-  dispatch: any
+type IParsedPieceOfStoreBuilder<T extends IPieceOfStore = IPieceOfStore> = (
+  dispatch: IDispatch
 ) => IParsedPieceOfStore<T>;
+
+function merge<T, K = any>(target: K[], fn: (acc: T, next: K) => T): T {
+  return target.reduce(fn, {} as T);
+}
+
+function emit<T>(state: T, subscribers: IParsedPiceOfStoreSubscribe<T>[]) {
+  subscribers.forEach((subscriber) => subscriber(state));
+}
+
+function workLineDecorator(cb: (...rest: any[]) => any, status: any) {
+  return function (...rest: any[]) {
+    const result = cb(...rest);
+    return {
+      ...result,
+      ...status
+    };
+  };
+}
+
+function parseWorkLines<T extends NonNullable<IPieceOfStore['workLines']>, K>(
+  workLines: T,
+  state: K,
+  subscribers: IParsedPiceOfStoreSubscribe<K>[]
+): IParsedWorkLines<T> {
+  const parsedWorkLines = Object.keys(workLines).map((key) => {
+    const {
+      push = (state) => state,
+      core = (state) => state,
+      done = (state) => state,
+      fail = (state) => state
+    } = workLines[key];
+
+    return {
+      [key]: (payload: any) => {
+        const pushState = workLineDecorator(push, {
+          [key]: {
+            isLoading: true,
+            isError: false
+          }
+        })(state, payload);
+        Object.assign(state, pushState);
+        emit(state, subscribers);
+
+        try {
+          const coreResult = core(pushState, payload);
+
+          const doneState = workLineDecorator(done, {
+            [key]: {
+              isLoading: false,
+              isError: false
+            }
+          })(pushState, payload, coreResult);
+
+          Object.assign(state, doneState);
+          emit(state, subscribers);
+        } catch (err) {
+          const failState = workLineDecorator(fail, {
+            [key]: {
+              isLoading: false,
+              isError: true
+            }
+          })(pushState, payload, err);
+
+          Object.assign(state, failState);
+          emit(state, subscribers);
+        }
+      }
+    };
+  });
+
+  return merge<IParsedWorkLines<T>>(parsedWorkLines, (acc, next) => ({
+    ...acc,
+    ...next
+  }));
+}
+
+function parseState<T, K extends NonNullable<IPieceOfStore['workLines']>>(
+  state: T,
+  workLines: K
+): T & IExtractWorkLinesStatus<K> {
+  const statuses: any = Object.keys(workLines)
+    .map((key) => ({
+      [key]: {
+        isLoading: false,
+        isError: false
+      }
+    }))
+    .reduce(
+      (acc, next) => ({
+        ...acc,
+        ...next
+      }),
+      {}
+    );
+
+  return {
+    ...state,
+    ...statuses
+  };
+}
 
 function createPieceOfStore<T, K extends IPieceOfStore<T>>(
   piceOfStore: IPieceOfStoreBuilder<K>
-) {
-  return piceOfStore;
+): IParsedPieceOfStoreBuilder<K> {
+  return function (dispatch: IDispatch) {
+    const { state, name, workLines = {} } = piceOfStore(dispatch);
+    const subscribers: IParsedPiceOfStoreSubscribe<T>[] = [];
+    const parsedState = parseState(state, workLines);
+
+    return {
+      state: parsedState,
+      name,
+      subscribers,
+      workLines: parseWorkLines(workLines, parsedState, subscribers),
+      subscribe(subscriber: IParsedPiceOfStoreSubscribe<T>) {
+        this.subscribers.push(subscriber);
+      }
+    };
+  };
 }
 
 interface IState {
-  test: number;
+  testValue: number;
 }
 
 const initState: IState = {
-  test: 1
+  testValue: 1
 };
 
 const pieceOfStore = createPieceOfStore(() => ({
-  asdfsd: 'sdfasd',
   state: initState,
   name: 'testPiceOfStore',
   workLines: {
     test: {
-      push(state: IState) {
-        return state;
+      push(state: IState, payload: number) {
+        return {
+          ...state,
+          testValue: payload
+        };
       },
       core(state) {
         return state;
       },
       done(state) {
-        return state;
+        return {
+          ...state
+        };
       },
       fail(state) {
-        return state;
+        return {
+          ...state
+        };
       }
     }
   }
 }));
 
-console.log((dispatch: any) => pieceOfStore(dispatch).workLines.test);
+const testPiceOfStore = pieceOfStore(123);
+
+testPiceOfStore.subscribe((state) => console.log(state));
+
+testPiceOfStore.workLines.test(1);
+
+testPiceOfStore.workLines.test(2);
