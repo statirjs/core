@@ -13,6 +13,7 @@
     "typescript:check": "npx tsc --noEmit",
     "typescript:types": "npx tsc --emitDeclarationOnly",
     "rollup:build": "npx rollup -c",
+    "rollup:watch": "npx rollup -c -w",
     "jest:test": "npx jest tests"
   },
   "repository": {
@@ -52,9 +53,7 @@
     "rollup-plugin-babel": "^4.4.0",
     "typescript": "^3.8.3"
   },
-  "dependencies": {
-    "@rematch/core": "^1.4.0"
-  },
+  "dependencies": {},
   "publishConfig": {
     "access": "public"
   }

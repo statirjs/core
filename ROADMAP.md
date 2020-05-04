@@ -10,7 +10,11 @@
 
 - [x] Add createPiceOfStore
 - [x] Add createStore
-- [ ] Add middleware mechanism
+- [x] Add middlewares mechanism
+- [ ] Add redux devtools
+- [ ] Add plugins mechanism
+- [ ] Add createPiceOfState validations
+- [ ] Add createStore validations
 
 # MILESTONE v0.2.0
 

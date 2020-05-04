@@ -1,3 +1,7 @@
+interface Window {
+  __REDUX_DEVTOOLS_EXTENSION__: any;
+}
+
 type IDispatch = {
   [X: string]: any;
 };
@@ -114,7 +118,6 @@ type IRExtractPipes<T extends IPoS[POS_FIELDS.PIPES]> = {
 };
 
 interface IRPoS<T extends IPoS = IPoS> {
-  name: string;
   state: T[POS_FIELDS.STATE];
   pipes: IRExtractPipes<T[POS_FIELDS.PIPES]>;
 }
@@ -229,20 +232,33 @@ function createPiceOfStore<T, K extends IPoS<T>>(
     const { pipes = {}, state } = builder(dispatch);
 
     return {
-      name,
       state,
       pipes: parsePipes(pipes, rootState, updateState, name)
     };
   };
 }
 
-interface IStatirConfig<T> {
+type IStatirMiddleware = (
+  next: (action: IAction) => void
+) => (action: IAction) => void;
+
+type IStatirCreateStore<T extends IRPoSBuilders> = (
+  config: IStatirConfig<T>
+) => IStatirStore<IExtractStoreState<T>, IExtractStoreDispatch<T>>;
+
+type IStatirUpgrade<T extends IRPoSBuilders> = (
+  next: IStatirCreateStore<T>
+) => IStatirCreateStore<T>;
+
+interface IStatirConfig<T extends IRPoSBuilders> {
   pices: T;
+  middlewares?: IStatirMiddleware[];
+  upgrades?: IStatirUpgrade<T>[];
 }
 
 type IStoreListner<T> = (rootState: T) => void;
 
-interface IStore<T, K extends any = any> {
+interface IStatirStore<T extends any = any, K extends any = any> {
   state: T;
   dispatch: K;
   listners: IStoreListner<T>[];
@@ -257,7 +273,7 @@ type IExtractStoreDispatch<T extends IRPoSBuilders> = {
   [X in keyof T]: ReturnType<T[X]>[POS_FIELDS.PIPES];
 };
 
-function initBlankStore<T>(initState: T): IStore<T> {
+function createBlankStore<T>(initState: T): IStatirStore<T> {
   return {
     state: initState,
     dispatch: {},
@@ -280,7 +296,7 @@ function extractState<T extends IRPoSBuilders>(
   );
 }
 
-function createUpdateState<T>(state: T, listners: IStoreListner<T>[]) {
+function createUpdaterStateTail<T>(state: T, listners: IStoreListner<T>[]) {
   return function (action: IAction) {
     const nextState = {
       ...state,
@@ -293,6 +309,16 @@ function createUpdateState<T>(state: T, listners: IStoreListner<T>[]) {
 
     listners.forEach((listner) => listner(state));
   };
+}
+
+function createUpdaterState<T>(
+  state: T,
+  listners: IStoreListner<T>[],
+  middlewares: IStatirMiddleware[] = []
+) {
+  const updaterTail = createUpdaterStateTail(state, listners);
+  const updater = middlewares.reduce((acc, next) => next(acc), updaterTail);
+  return updater;
 }
 
 function extractPices<T>(
@@ -326,20 +352,40 @@ function updateDispatcher(pices: IRPoSs, dispatch: IDispatch) {
   Object.assign(dispatch, res);
 }
 
-function createStore<T extends IRPoSBuilders>(
+function initStore<T extends IRPoSBuilders>(
   config: IStatirConfig<T>
-): IStore<IExtractStoreState<T>, IExtractStoreDispatch<T>> {
+): IStatirStore<IExtractStoreState<T>, IExtractStoreDispatch<T>> {
   const initState = extractState(config.pices);
-  const store = initBlankStore(initState);
-  const updateState = createUpdateState(store.state, store.listners);
+  const store = createBlankStore(initState);
+
+  const updaterState = createUpdaterState(
+    store.state,
+    store.listners,
+    config.middlewares
+  );
+
   const pices = extractPices(
     store.state,
     store.dispatch,
-    updateState,
+    updaterState,
     config.pices
   );
+
   updateDispatcher(pices, store.dispatch);
   return store;
+}
+
+function createStore<T extends IRPoSBuilders>(
+  config: IStatirConfig<T>
+): IStatirStore<IExtractStoreState<T>, IExtractStoreDispatch<T>> {
+  const upgrades = config.upgrades || [];
+  const upgradeTail: IStatirCreateStore<T> = initStore;
+  const upgradedInitStore = upgrades.reduce(
+    (acc, next) => next(acc),
+    upgradeTail
+  );
+
+  return upgradedInitStore(config);
 }
 
 interface IState {
@@ -351,7 +397,6 @@ const initState: IState = {
 };
 
 const piceOfStore = createPiceOfStore(() => ({
-  name: 'testPiceOfStore',
   state: initState,
   pipes: {
     increment: {
@@ -374,18 +419,32 @@ const piceOfStore = createPiceOfStore(() => ({
   }
 }));
 
+function testMiddlewares(next: (action: IAction) => void) {
+  return function (action: IAction) {
+    next(action);
+  };
+}
+
+function testUpgrade<T extends IRPoSBuilders>(next: IStatirCreateStore<T>) {
+  return function (config: IStatirConfig<T>) {
+    const store = next(config);
+
+    if (window && window.__REDUX_DEVTOOLS_EXTENSION__) {
+      const devtools = window.__REDUX_DEVTOOLS_EXTENSION__.connect();
+      devtools.init(store.state);
+      devtools.send('asasd', { test: 1 });
+    }
+
+    return store;
+  };
+}
+
 const store = createStore({
   pices: {
     piceOfStore
-  }
+  },
+  middlewares: [testMiddlewares],
+  upgrades: [testUpgrade]
 });
-
-store.addListner(({ piceOfStore }) => console.log(piceOfStore));
-
-store.dispatch.piceOfStore.increment();
-
-store.dispatch.piceOfStore.increment();
-
-store.dispatch.piceOfStore.increment();
 
 store.dispatch.piceOfStore.increment();
