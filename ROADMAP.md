@@ -1,10 +1,16 @@
-# MILESTONE v0.3.0
+# MILESTONE v0.4.0
 
 - [ ] Edit pull request ci
 - [ ] Add dev/prod rollup config
 - [ ] Add dev/prod babel config
 - [ ] Add prod minification
 - [ ] Add es output
+
+# MILESTONE v0.3.0
+
+- [x] Add createPiceOfStore
+- [x] Add createStore
+- [ ] Add middleware mechanism
 
 # MILESTONE v0.2.0
 

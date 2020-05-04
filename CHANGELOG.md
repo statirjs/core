@@ -2,6 +2,9 @@
 
 ## Project
 
+1. Added createPiceOfStore
+2. Added createStore
+
 # 0.2.0 (April 19, 2020)
 
 ## Project
