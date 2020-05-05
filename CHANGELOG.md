@@ -1,6 +1,6 @@
 # Dev
 
-# 0.2.2 (May 5, 2020)
+# 0.2.4 (May 5, 2020)
 
 1. Added dev/prod rollup config
 2. Added prod minification
