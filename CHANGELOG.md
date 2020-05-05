@@ -1,5 +1,14 @@
 # Dev
 
+# 0.2.2 (May 5, 2020)
+
+1. Added dev/prod rollup config
+2. Added prod minification
+3. Added es output
+4. Added cjs output
+5. Added umd output
+6. Added index.d.ts
+
 # 0.2.1 (May 5, 2020)
 
 1. Added createPiceOfStore

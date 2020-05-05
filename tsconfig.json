@@ -1,16 +1,15 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "dist",
+    "rootDir": "./src",
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Node",
     "lib": ["ESNext", "DOM"],
     "allowJs": true,
     "checkJs": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "declaration": true,
-    "declarationDir": "types",
     "skipLibCheck": true,
     "noImplicitAny": true,
     "strict": true,
