@@ -20,7 +20,7 @@ import {
   IExtractStoreDispatch,
   IStatirConfig,
   IStatirCreateStore
-} from '../index.d';
+} from './types';
 
 const pipeCore = () => {};
 
@@ -103,7 +103,7 @@ function parsePipes<T, K extends NonNullable<IPoS[POS_FIELDS.PIPES]>>(
   );
 }
 
-function createPiceOfStore<T, K extends IPoS<T>>(
+export function createPiceOfStore<T, K extends IPoS<T>>(
   builder: IPoSBuilder<K>
 ): IRPoSBuilder<T, K> {
   return function (
@@ -223,7 +223,7 @@ function initStore<T extends IRPoSBuilders>(
   return store;
 }
 
-function createStore<T extends IRPoSBuilders>(
+export function createStore<T extends IRPoSBuilders>(
   config: IStatirConfig<T>
 ): IStatirStore<IExtractStoreState<T>, IExtractStoreDispatch<T>> {
   const upgrades = config.upgrades || [];
@@ -234,43 +234,6 @@ function createStore<T extends IRPoSBuilders>(
   );
 
   return upgradedInitStore(config);
-}
-
-interface IState {
-  count: number;
-}
-
-const initState: IState = {
-  count: 0
-};
-
-const piceOfStore = createPiceOfStore(() => ({
-  state: initState,
-  pipes: {
-    increment: {
-      push(state: IState) {
-        return {
-          ...state,
-          count: state.count + 1
-        };
-      },
-      core(state: IState) {
-        return state;
-      },
-      done(state) {
-        return state;
-      },
-      fail(state) {
-        return state;
-      }
-    }
-  }
-}));
-
-function testMiddlewares(next: (action: IAction) => void) {
-  return function (action: IAction) {
-    next(action);
-  };
 }
 
 function formateReduxDevtoolsActionName({
@@ -293,7 +256,7 @@ function createReduxDevtoolsMiddleware(
   };
 }
 
-function reduxDevtoolsUpgrade<T extends IRPoSBuilders>(
+export function reduxDevtoolsUpgrade<T extends IRPoSBuilders>(
   createStore: IStatirCreateStore<T>
 ) {
   return function (config: IStatirConfig<T>) {
@@ -315,13 +278,3 @@ function reduxDevtoolsUpgrade<T extends IRPoSBuilders>(
     return store;
   };
 }
-
-const store = createStore({
-  pices: {
-    piceOfStore
-  },
-  middlewares: [testMiddlewares],
-  upgrades: [reduxDevtoolsUpgrade]
-});
-
-store.dispatch.piceOfStore.increment();

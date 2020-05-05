@@ -152,45 +152,6 @@ export interface IRPoSBuilders {
   [X: string]: IRPoSBuilder;
 }
 
-export declare function pipeCore(): void;
-
-export declare function pipeDone<T>(state: T): T;
-
-export declare function pipeFail<T>(state: T): T;
-
-export declare function createUpdateAction<T>(
-  state: T,
-  payload: IPayload,
-  piceOfStateName: string,
-  pipeName: string,
-  actionName: string
-): IAction<T>;
-
-export declare function parsePipe<
-  T,
-  K extends NonNullable<IPoS[POS_FIELDS.PIPES]>[string]
->(
-  pipe: K,
-  rootState: IRootState,
-  updateState: IUpdateState<T>,
-  piceOfStateName: string,
-  pipeName: string
-): IRExtractPipe<K>;
-
-export declare function parsePipes<
-  T,
-  K extends NonNullable<IPoS[POS_FIELDS.PIPES]>
->(
-  pipes: K,
-  rootState: IRootState,
-  updateState: IUpdateState<T>,
-  piceOfStateName: string
-): IRExtractPipes<K>;
-
-export declare function createPiceOfStore<T, K extends IPoS<T>>(
-  builder: IPoSBuilder<K>
-): IRPoSBuilder<T, K>;
-
 export type IStatirMiddleware = (
   next: (action: IAction) => void
 ) => (action: IAction) => void;
@@ -225,40 +186,3 @@ export type IExtractStoreState<T extends IRPoSBuilders> = {
 export type IExtractStoreDispatch<T extends IRPoSBuilders> = {
   [X in keyof T]: ReturnType<T[X]>[POS_FIELDS.PIPES];
 };
-
-export declare function createBlankStore<T>(initState: T): IStatirStore<T>;
-
-export declare function extractState<T extends IRPoSBuilders>(
-  pices: T
-): IExtractStoreState<T>;
-
-export declare function createUpdaterStateTail<T>(
-  state: T,
-  listners: IStoreListner<T>[]
-): IUpdateState;
-
-export declare function createUpdaterState<T>(
-  state: T,
-  listners: IStoreListner<T>[],
-  middlewares: IStatirMiddleware[]
-): IUpdateState;
-
-export declare function extractPices<T>(
-  state: T,
-  dispatch: IDispatch,
-  updateState: IUpdateState,
-  pices: IRPoSBuilders
-): IRPoSs;
-
-export declare function updateDispatcher(
-  pices: IRPoSs,
-  dispatch: IDispatch
-): void;
-
-export declare function initStore<T extends IRPoSBuilders>(
-  config: IStatirConfig<T>
-): IStatirStore<IExtractStoreState<T>, IExtractStoreDispatch<T>>;
-
-export declare function createStore<T extends IRPoSBuilders>(
-  config: IStatirConfig<T>
-): IStatirStore<IExtractStoreState<T>, IExtractStoreDispatch<T>>;

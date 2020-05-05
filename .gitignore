@@ -6,3 +6,4 @@ node_modules
 
 # FILES
 .DB_Store
+index.d.ts
