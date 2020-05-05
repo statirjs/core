@@ -1,5 +1,14 @@
+interface IReduxDevtoolsExtenstionInstance {
+  init(state: any): void;
+  send(name: string, state: any): void;
+}
+
+interface IReduxDevtoolsExtenstion {
+  connect(config?: any): IReduxDevtoolsExtenstionInstance;
+}
+
 interface Window {
-  __REDUX_DEVTOOLS_EXTENSION__: any;
+  __REDUX_DEVTOOLS_EXTENSION__?: IReduxDevtoolsExtenstion;
 }
 
 type IDispatch = {
@@ -425,16 +434,45 @@ function testMiddlewares(next: (action: IAction) => void) {
   };
 }
 
-function testUpgrade<T extends IRPoSBuilders>(next: IStatirCreateStore<T>) {
-  return function (config: IStatirConfig<T>) {
-    const store = next(config);
+function formateReduxDevtoolsActionName({
+  piceOfStore,
+  pipe,
+  action
+}: IAction): string {
+  return `${piceOfStore}/${pipe}:${action}`;
+}
 
+function createReduxDevtoolsMiddleware(
+  devtools: IReduxDevtoolsExtenstionInstance
+) {
+  return function (next: (action: IAction) => void) {
+    return function (action: IAction) {
+      const actionName = formateReduxDevtoolsActionName(action);
+      devtools.send(actionName, action.state);
+      next(action);
+    };
+  };
+}
+
+function reduxDevtoolsUpgrade<T extends IRPoSBuilders>(
+  createStore: IStatirCreateStore<T>
+) {
+  return function (config: IStatirConfig<T>) {
     if (window && window.__REDUX_DEVTOOLS_EXTENSION__) {
       const devtools = window.__REDUX_DEVTOOLS_EXTENSION__.connect();
-      devtools.init(store.state);
-      devtools.send('asasd', { test: 1 });
+      const middleware = createReduxDevtoolsMiddleware(devtools);
+
+      const nextConfig: IStatirConfig<T> = {
+        ...config,
+        middlewares: [...(config.middlewares || []), middleware]
+      };
+
+      const upgradedStore = createStore(nextConfig);
+      devtools.init(upgradedStore.state);
+      return upgradedStore;
     }
 
+    const store = createStore(config);
     return store;
   };
 }
@@ -444,7 +482,7 @@ const store = createStore({
     piceOfStore
   },
   middlewares: [testMiddlewares],
-  upgrades: [testUpgrade]
+  upgrades: [reduxDevtoolsUpgrade]
 });
 
 store.dispatch.piceOfStore.increment();
