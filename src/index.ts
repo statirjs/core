@@ -1,152 +1,26 @@
-interface IReduxDevtoolsExtenstionInstance {
-  init(state: any): void;
-  send(name: string, state: any): void;
-}
-
-interface IReduxDevtoolsExtenstion {
-  connect(config?: any): IReduxDevtoolsExtenstionInstance;
-}
-
-interface Window {
-  __REDUX_DEVTOOLS_EXTENSION__?: IReduxDevtoolsExtenstion;
-}
-
-type IDispatch = {
-  [X: string]: any;
-};
-type IRootState = {
-  [X: string]: any;
-};
-type IPayload = any;
-
-interface IAction<T extends any = any> {
-  piceOfStore: string;
-  pipe: string;
-  action: string;
-  payload: IPayload;
-  state: T;
-}
-
-type IUpdateState<T extends any = any> = (action: IAction<T>) => void;
-
-interface IPoSPipe<T extends any = any, K = any> {
-  push(state: T, payload: IPayload, rootState: IRootState): T;
-  core?(state: T, payload: IPayload, rootState: IRootState): Promise<K> | K;
-  done?(state: T, data: K, payload: IPayload, rootState: IRootState): T;
-  fail?(state: T, error: Error, payload: IPayload, rootState: IRootState): T;
-}
-
-enum PIPE_ACTIONS {
-  PUSH = 'push',
-  CORE = 'core',
-  DONE = 'done',
-  FAIL = 'fail'
-}
-
-enum POS_FIELDS {
-  NAME = 'name',
-  STATE = 'state',
-  PIPES = 'pipes'
-}
-
-type IPoSPipes<T, K extends string = string> = {
-  [X in K]: IPoSPipe<T>;
-};
-
-interface IPoS<T extends any = any> {
-  state: T;
-  pipes?: IPoSPipes<T>;
-}
-
-type IRExtractPushPayload<
-  T extends IPoSPipe
-> = T[PIPE_ACTIONS.PUSH] extends () => void
-  ? null
-  : T[PIPE_ACTIONS.PUSH] extends (state: infer S) => infer S
-  ? null
-  : T[PIPE_ACTIONS.PUSH] extends (state: infer S, payload: infer K) => infer S
-  ? K
-  : null;
-
-type IRExtractCorePayload<
-  T extends IPoSPipe
-> = T[PIPE_ACTIONS.CORE] extends () => void
-  ? null
-  : T[PIPE_ACTIONS.CORE] extends (state: infer S) => infer P
-  ? null
-  : T[PIPE_ACTIONS.CORE] extends (state: infer S, payload: infer K) => infer P
-  ? K
-  : null;
-
-type IRExtractDonePayload<
-  T extends IPoSPipe
-> = T[PIPE_ACTIONS.DONE] extends () => void
-  ? null
-  : T[PIPE_ACTIONS.DONE] extends (state: infer S) => infer S
-  ? null
-  : T[PIPE_ACTIONS.DONE] extends (state: infer S, data: infer P) => infer S
-  ? null
-  : T[PIPE_ACTIONS.DONE] extends (
-      state: infer S,
-      data: infer P,
-      payload: infer K
-    ) => infer S
-  ? K
-  : null;
-
-type IRExtractFailPayload<
-  T extends IPoSPipe
-> = T[PIPE_ACTIONS.FAIL] extends () => void
-  ? null
-  : T[PIPE_ACTIONS.FAIL] extends (state: infer S) => infer S
-  ? null
-  : T[PIPE_ACTIONS.FAIL] extends (state: infer S, error: infer P) => infer S
-  ? null
-  : T[PIPE_ACTIONS.FAIL] extends (
-      state: infer S,
-      error: infer P,
-      payload: infer K
-    ) => infer S
-  ? K
-  : null;
-
-type IRExtractPayload<T extends IPoSPipe> = NonNullable<
-  | IRExtractPushPayload<T>
-  | IRExtractCorePayload<T>
-  | IRExtractDonePayload<T>
-  | IRExtractFailPayload<T>
->;
-
-type IRExtractPipe<
-  T extends NonNullable<IPoS[POS_FIELDS.PIPES]>[string],
-  K = IRExtractPayload<T>
-> = [K] extends [void] ? () => void : (payload: K) => void;
-
-type IRExtractPipes<T extends IPoS[POS_FIELDS.PIPES]> = {
-  [X in keyof T]: IRExtractPipe<NonNullable<T>[X]>;
-};
-
-interface IRPoS<T extends IPoS = IPoS> {
-  state: T[POS_FIELDS.STATE];
-  pipes: IRExtractPipes<T[POS_FIELDS.PIPES]>;
-}
-
-interface IRPoSs {
-  [X: string]: IRPoS;
-}
-
-type IPoSBuilder<T> = (dispatch: IDispatch) => T;
-
-type IRPoSBuilder<T extends any = any, K extends IPoS<T> = IPoS> = (
-  name: string,
-  rootState: IRootState,
-  dispatch: IDispatch,
-  updateState: IUpdateState<T>
-) => IRPoS<K>;
-
-interface IRPoSBuilders {
-  [X: string]: IRPoSBuilder;
-}
+import {
+  IPayload,
+  IAction,
+  IPoS,
+  POS_FIELDS,
+  PIPE_ACTIONS,
+  IRootState,
+  IDispatch,
+  IUpdateState,
+  IRExtractPipe,
+  IRExtractPipes,
+  IRPoSBuilder,
+  IRPoSBuilders,
+  IPoSBuilder,
+  IStatirStore,
+  IStoreListner,
+  IExtractStoreState,
+  IStatirMiddleware,
+  IRPoSs,
+  IExtractStoreDispatch,
+  IStatirConfig,
+  IStatirCreateStore
+} from '../index.d';
 
 const pipeCore = () => {};
 
@@ -246,41 +120,6 @@ function createPiceOfStore<T, K extends IPoS<T>>(
     };
   };
 }
-
-type IStatirMiddleware = (
-  next: (action: IAction) => void
-) => (action: IAction) => void;
-
-type IStatirCreateStore<T extends IRPoSBuilders> = (
-  config: IStatirConfig<T>
-) => IStatirStore<IExtractStoreState<T>, IExtractStoreDispatch<T>>;
-
-type IStatirUpgrade<T extends IRPoSBuilders> = (
-  next: IStatirCreateStore<T>
-) => IStatirCreateStore<T>;
-
-interface IStatirConfig<T extends IRPoSBuilders> {
-  pices: T;
-  middlewares?: IStatirMiddleware[];
-  upgrades?: IStatirUpgrade<T>[];
-}
-
-type IStoreListner<T> = (rootState: T) => void;
-
-interface IStatirStore<T extends any = any, K extends any = any> {
-  state: T;
-  dispatch: K;
-  listners: IStoreListner<T>[];
-  addListner(listner: IStoreListner<T>): void;
-}
-
-type IExtractStoreState<T extends IRPoSBuilders> = {
-  [X in keyof T]: ReturnType<T[X]>[POS_FIELDS.STATE];
-};
-
-type IExtractStoreDispatch<T extends IRPoSBuilders> = {
-  [X in keyof T]: ReturnType<T[X]>[POS_FIELDS.PIPES];
-};
 
 function createBlankStore<T>(initState: T): IStatirStore<T> {
   return {
