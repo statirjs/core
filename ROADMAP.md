@@ -11,7 +11,7 @@
 - [x] Add createPiceOfStore
 - [x] Add createStore
 - [x] Add middlewares mechanism
-- [ ] Add redux devtools
+- [x] Add redux devtools
 - [ ] Add plugins mechanism
 - [ ] Add createPiceOfState validations
 - [ ] Add createStore validations

@@ -1,13 +1,12 @@
 # Dev
 
-## Project
+# 0.2.1 (May 5, 2020)
 
 1. Added createPiceOfStore
 2. Added createStore
+3. Added redux-devtools
 
 # 0.2.0 (April 19, 2020)
-
-## Project
 
 1. Tests initiated
 2. Added logo
@@ -20,14 +19,10 @@
 
 # 0.1.4 (April 17, 2020)
 
-## Project
-
 1. Rollup initiated
 2. Babel initiated
 
 # 0.1.3 (April 12, 2020)
-
-## Project
 
 1. Metadata files initiated
 2. Npm initiated
