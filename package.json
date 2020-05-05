@@ -3,9 +3,9 @@
   "version": "0.2.2",
   "description": "Minimalistic state manager",
   "main": "./build/index.js",
-  "types": "./types",
+  "types": "./index.d.ts",
   "scripts": {
-    "project:clean": "npx rimraf build dist types",
+    "project:clean": "npx rimraf build dist types index.d.ts",
     "prettier:write": "npx prettier --write src",
     "prettier:check": "npx prettier --check src",
     "eslint:check": "npx eslint --ext .ts src",
@@ -14,7 +14,9 @@
     "typescript:types": "npx tsc --emitDeclarationOnly",
     "rollup:build": "npx rollup -c",
     "rollup:watch": "npx rollup -c -w",
-    "jest:test": "npx jest tests"
+    "jest:test": "npx jest tests",
+    "scripts:types": "bash ./scripts/types.sh",
+    "publish:clean": "npx rimraf dist types"
   },
   "repository": {
     "type": "git",
