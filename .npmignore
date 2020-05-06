@@ -3,6 +3,7 @@ dist
 tests
 logo
 node_modules
+scripts
 
 # FILES
 .DB_Store
