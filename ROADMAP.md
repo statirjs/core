@@ -5,8 +5,8 @@
 - [x] Add middlewares mechanism
 - [x] Add redux devtools
 - [ ] Add plugins mechanism
-- [ ] Add createPiceOfState validations
-- [ ] Add createStore validations
+- [x] Add createPiceOfState validations
+- [x] Add createStore validations
 - [ ] Edit pull request ci
 - [x] Add dev/prod rollup config
 - [x] Add prod minification
@@ -14,6 +14,16 @@
 - [x] Add cjs output
 - [x] Add umd output
 - [x] Add index.d.ts
+- [x] Add store config test
+- [x] Add pice config test
+- [x] Add pice state test
+- [ ] Add pice pipes test
+- [ ] Add store state test
+- [ ] Add store dispatch test
+- [ ] Add store observers test
+- [ ] Rewrite scripts to js
+- [ ] Redesign logo to black bo bordered
+- [ ] Extract redux-devtools upgrade
 
 # MILESTONE v0.2.0
 

@@ -6,7 +6,7 @@ import {
   PIPE_ACTIONS,
   IRootState,
   IDispatch,
-  IUpdateState,
+  IPushAction,
   IRExtractPipe,
   IRExtractPipes,
   IRPoSBuilder,
@@ -21,6 +21,7 @@ import {
   IStatirConfig,
   IStatirCreateStore
 } from './types';
+import { warning } from './warning';
 
 const pipeCore = () => {};
 
@@ -47,7 +48,7 @@ function createUpdateAction<T>(
 function parsePipe<T, K extends NonNullable<IPoS[POS_FIELDS.PIPES]>[string]>(
   pipe: K,
   rootState: IRootState,
-  updateState: IUpdateState<T>,
+  pushAction: IPushAction<T>,
   piceOfStateName: string,
   pipeName: string
 ): IRExtractPipe<K> {
@@ -55,7 +56,7 @@ function parsePipe<T, K extends NonNullable<IPoS[POS_FIELDS.PIPES]>[string]>(
   const done = pipe.done || pipeDone;
   const fail = pipe.fail || pipeFail;
 
-  function pushAction(state: T, payload: IPayload, actionName: string) {
+  function pushCurrentAction(state: T, payload: IPayload, actionName: string) {
     const action = createUpdateAction(
       state,
       payload,
@@ -63,21 +64,21 @@ function parsePipe<T, K extends NonNullable<IPoS[POS_FIELDS.PIPES]>[string]>(
       pipeName,
       actionName
     );
-    updateState(action);
+    pushAction(action);
   }
 
   return function (payload: IPayload) {
     const statePoS = rootState[piceOfStateName];
     const statePush = pipe.push(statePoS, payload, rootState);
-    pushAction(statePush, payload, PIPE_ACTIONS.PUSH);
+    pushCurrentAction(statePush, payload, PIPE_ACTIONS.PUSH);
 
     try {
       const data = core(statePush, payload, rootState);
       const stateDone = done(statePush, data, payload, rootState);
-      pushAction(stateDone, payload, PIPE_ACTIONS.DONE);
+      pushCurrentAction(stateDone, payload, PIPE_ACTIONS.DONE);
     } catch (err) {
       const stateFail = fail(statePush, err, payload, rootState);
-      pushAction(stateFail, payload, PIPE_ACTIONS.FAIL);
+      pushCurrentAction(stateFail, payload, PIPE_ACTIONS.FAIL);
     }
   } as IRExtractPipe<K>;
 }
@@ -85,7 +86,7 @@ function parsePipe<T, K extends NonNullable<IPoS[POS_FIELDS.PIPES]>[string]>(
 function parsePipes<T, K extends NonNullable<IPoS[POS_FIELDS.PIPES]>>(
   pipes: K,
   rootState: IRootState,
-  updateState: IUpdateState<T>,
+  pushAction: IPushAction<T>,
   piceOfStateName: string
 ): IRExtractPipes<K> {
   return Object.keys(pipes).reduce(
@@ -94,7 +95,7 @@ function parsePipes<T, K extends NonNullable<IPoS[POS_FIELDS.PIPES]>>(
       [pipeName]: parsePipe(
         pipes[pipeName],
         rootState,
-        updateState,
+        pushAction,
         piceOfStateName,
         pipeName
       )
@@ -110,13 +111,26 @@ export function createPiceOfStore<T, K extends IPoS<T>>(
     name: string,
     rootState: IRootState,
     dispatch: IDispatch,
-    updateState: IUpdateState<T>
+    pushAction: IPushAction<T>
   ) {
+    warning([
+      [!name, 'Pice of store name is not a valid name'],
+      [!rootState[name], 'Pice of store with provided name not exist'],
+      [typeof builder !== 'function', 'Pice of store is not a function'],
+      [typeof pushAction !== 'function', 'updateState is not a function'],
+      [!dispatch, 'Dispatcher not constructed']
+    ]);
+
     const { pipes = {}, state } = builder(dispatch);
+
+    warning([
+      [!state, `State required in ${name} pice of store`],
+      [typeof state !== 'object', 'Pice of store state must be a object']
+    ]);
 
     return {
       state,
-      pipes: parsePipes(pipes, rootState, updateState, name)
+      pipes: parsePipes(pipes, rootState, pushAction, name)
     };
   };
 }
@@ -138,13 +152,13 @@ function extractState<T extends IRPoSBuilders>(
   return Object.keys(pices).reduce(
     (acc, key) => ({
       ...acc,
-      [key]: pices[key](key, {}, {}, () => {}).state
+      [key]: pices[key](key, { [key]: {} }, {}, () => {}).state
     }),
     {} as IExtractStoreState<T>
   );
 }
 
-function createUpdaterStateTail<T>(state: T, listners: IStoreListner<T>[]) {
+function createPushActionTail<T>(state: T, listners: IStoreListner<T>[]) {
   return function (action: IAction) {
     const nextState = {
       ...state,
@@ -159,26 +173,29 @@ function createUpdaterStateTail<T>(state: T, listners: IStoreListner<T>[]) {
   };
 }
 
-function createUpdaterState<T>(
+function createPushAction<T>(
   state: T,
   listners: IStoreListner<T>[],
   middlewares: IStatirMiddleware[] = []
 ) {
-  const updaterTail = createUpdaterStateTail(state, listners);
-  const updater = middlewares.reduce((acc, next) => next(acc), updaterTail);
-  return updater;
+  const pushActionTail = createPushActionTail(state, listners);
+  const pushAction = middlewares.reduce(
+    (acc, next) => next(acc),
+    pushActionTail
+  );
+  return pushAction;
 }
 
 function extractPices<T>(
   state: T,
   dispatch: IDispatch,
-  updateState: IUpdateState,
+  pushAction: IPushAction,
   pices: IRPoSBuilders
 ) {
   return Object.keys(pices).reduce(
     (acc, key) => ({
       ...acc,
-      [key]: pices[key](key, state, dispatch, updateState)
+      [key]: pices[key](key, state, dispatch, pushAction)
     }),
     {}
   );
@@ -206,7 +223,7 @@ function initStore<T extends IRPoSBuilders>(
   const initState = extractState(config.pices);
   const store = createBlankStore(initState);
 
-  const updaterState = createUpdaterState(
+  const pushAction = createPushAction(
     store.state,
     store.listners,
     config.middlewares
@@ -215,7 +232,7 @@ function initStore<T extends IRPoSBuilders>(
   const pices = extractPices(
     store.state,
     store.dispatch,
-    updaterState,
+    pushAction,
     config.pices
   );
 
@@ -226,6 +243,11 @@ function initStore<T extends IRPoSBuilders>(
 export function createStore<T extends IRPoSBuilders>(
   config: IStatirConfig<T>
 ): IStatirStore<IExtractStoreState<T>, IExtractStoreDispatch<T>> {
+  warning([
+    [!config, 'Config not provided'],
+    [!config.pices, 'Store pices not provided']
+  ]);
+
   const upgrades = config.upgrades || [];
   const upgradeTail: IStatirCreateStore<T> = initStore;
   const upgradedInitStore = upgrades.reduce(

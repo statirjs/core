@@ -3,6 +3,8 @@ build
 dist
 types
 node_modules
+coverage
 
 # FILES
 index.d.ts
+.DB_Store

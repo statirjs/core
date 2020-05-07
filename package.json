@@ -51,6 +51,7 @@
     "rifraf": "^2.0.3",
     "rollup": "^2.6.1",
     "rollup-plugin-terser": "^5.3.0",
+    "ts-jest": "^25.5.0",
     "typescript": "^3.8.3"
   },
   "publishConfig": {

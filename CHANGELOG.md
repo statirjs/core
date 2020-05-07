@@ -1,5 +1,11 @@
 # Dev
 
+1. Added store config test
+2. Added pice config test
+3. Added pice state test
+4. Added createPiceOfState validations
+5. Added createStore validations
+
 # 0.2.4 (May 5, 2020)
 
 1. Added dev/prod rollup config

@@ -3,6 +3,7 @@ dist
 build
 types
 node_modules
+coverage
 
 # FILES
 .DB_Store

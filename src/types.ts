@@ -31,7 +31,7 @@ export interface IAction<T extends any = any> {
   state: T;
 }
 
-export type IUpdateState<T extends any = any> = (action: IAction<T>) => void;
+export type IPushAction<T extends any = any> = (action: IAction<T>) => void;
 
 export interface IPoSPipe<T extends any = any, K = any> {
   push(state: T, payload: IPayload, rootState: IRootState): T;
@@ -145,7 +145,7 @@ export type IRPoSBuilder<T extends any = any, K extends IPoS<T> = IPoS> = (
   name: string,
   rootState: IRootState,
   dispatch: IDispatch,
-  updateState: IUpdateState<T>
+  pushAction: IPushAction<T>
 ) => IRPoS<K>;
 
 export interface IRPoSBuilders {
