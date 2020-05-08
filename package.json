@@ -7,7 +7,7 @@
   "module": "./build/es/index.js",
   "types": "./index.d.ts",
   "scripts": {
-    "project:clean": "npx rimraf build dist types index.d.ts",
+    "project:clean": "npx rimraf build dist types index.d.ts coverage",
     "prettier:write": "npx prettier --write src",
     "prettier:check": "npx prettier --check src",
     "eslint:check": "npx eslint --ext .ts src",
@@ -17,7 +17,7 @@
     "rollup:build": "npx rollup -c",
     "rollup:watch": "npx rollup -c -w",
     "scripts:types": "bash ./scripts/types.sh",
-    "publish:clean": "npx rimraf dist types"
+    "publish:clean": "npx rimraf dist types coverage"
   },
   "repository": {
     "type": "git",

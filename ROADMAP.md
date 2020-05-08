@@ -1,10 +1,14 @@
+# MILESTONE v0.4.0
+
+- [ ] Add local plugins mechanism
+- [ ] Add pice of store actions
+
 # MILESTONE v0.3.0
 
 - [x] Add createPiceOfStore
 - [x] Add createStore
 - [x] Add middlewares mechanism
 - [x] Add redux devtools
-- [ ] Add plugins mechanism
 - [x] Add createPiceOfState validations
 - [x] Add createStore validations
 - [ ] Edit pull request ci
@@ -21,9 +25,11 @@
 - [ ] Add store state test
 - [ ] Add store dispatch test
 - [ ] Add store observers test
+- [ ] Add store upgrades test
+- [ ] Add store middlewares test
 - [ ] Rewrite scripts to js
 - [ ] Redesign logo to black bo bordered
-- [ ] Extract redux-devtools upgrade
+- [ ] Create index.d.ts bundler script
 
 # MILESTONE v0.2.0
 

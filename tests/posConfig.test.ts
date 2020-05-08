@@ -30,7 +30,7 @@ describe('Testing pice of store config', () => {
         null as any,
         null as any
       )
-    ).toThrow();
+    ).not.toThrow();
 
     expect(() =>
       createPiceOfStore(() => posState)(
@@ -39,7 +39,7 @@ describe('Testing pice of store config', () => {
         null as any,
         null as any
       )
-    ).toThrow();
+    ).not.toThrow();
 
     expect(() =>
       createPiceOfStore(() => posState)(
@@ -48,7 +48,7 @@ describe('Testing pice of store config', () => {
         null as any,
         null as any
       )
-    ).toThrow();
+    ).not.toThrow();
 
     expect(() =>
       createPiceOfStore(() => posState)(
@@ -57,7 +57,7 @@ describe('Testing pice of store config', () => {
         () => {},
         null as any
       )
-    ).toThrow();
+    ).not.toThrow();
 
     expect(() =>
       createPiceOfStore(() => posState)(

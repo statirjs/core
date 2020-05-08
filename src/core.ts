@@ -22,6 +22,7 @@ import {
   IStatirCreateStore
 } from './types';
 import { warning } from './warning';
+import { reduxDevtoolsUpgrade } from './devtool';
 
 const pipeCore = () => {};
 
@@ -45,13 +46,18 @@ function createUpdateAction<T>(
   };
 }
 
-function parsePipe<T, K extends NonNullable<IPoS[POS_FIELDS.PIPES]>[string]>(
+export function parsePipe<
+  T,
+  K extends NonNullable<IPoS[POS_FIELDS.PIPES]>[string]
+>(
   pipe: K,
   rootState: IRootState,
   pushAction: IPushAction<T>,
   piceOfStateName: string,
   pipeName: string
 ): IRExtractPipe<K> {
+  warning([[typeof pipe !== 'object', 'Pice of store pipe must be a object']]);
+
   const core = pipe.core || pipeCore;
   const done = pipe.done || pipeDone;
   const fail = pipe.fail || pipeFail;
@@ -83,12 +89,16 @@ function parsePipe<T, K extends NonNullable<IPoS[POS_FIELDS.PIPES]>[string]>(
   } as IRExtractPipe<K>;
 }
 
-function parsePipes<T, K extends NonNullable<IPoS[POS_FIELDS.PIPES]>>(
+export function parsePipes<T, K extends NonNullable<IPoS[POS_FIELDS.PIPES]>>(
   pipes: K,
   rootState: IRootState,
   pushAction: IPushAction<T>,
   piceOfStateName: string
 ): IRExtractPipes<K> {
+  warning([
+    [typeof pipes !== 'object', 'Pice of store pipes must be a object']
+  ]);
+
   return Object.keys(pipes).reduce(
     (acc, pipeName) => ({
       ...acc,
@@ -114,17 +124,13 @@ export function createPiceOfStore<T, K extends IPoS<T>>(
     pushAction: IPushAction<T>
   ) {
     warning([
-      [!name, 'Pice of store name is not a valid name'],
-      [!rootState[name], 'Pice of store with provided name not exist'],
-      [typeof builder !== 'function', 'Pice of store is not a function'],
-      [typeof pushAction !== 'function', 'updateState is not a function'],
-      [!dispatch, 'Dispatcher not constructed']
+      [typeof builder !== 'function', 'Pice of store is not a function']
     ]);
 
     const { pipes = {}, state } = builder(dispatch);
 
     warning([
-      [!state, `State required in ${name} pice of store`],
+      [!state, `Pice of store state is required`],
       [typeof state !== 'object', 'Pice of store state must be a object']
     ]);
 
@@ -249,54 +255,12 @@ export function createStore<T extends IRPoSBuilders>(
   ]);
 
   const upgrades = config.upgrades || [];
+  const upgradesWithDevtools = [reduxDevtoolsUpgrade, ...upgrades];
   const upgradeTail: IStatirCreateStore<T> = initStore;
-  const upgradedInitStore = upgrades.reduce(
+  const upgradedInitStore = upgradesWithDevtools.reduce(
     (acc, next) => next(acc),
     upgradeTail
   );
 
   return upgradedInitStore(config);
-}
-
-function formateReduxDevtoolsActionName({
-  piceOfStore,
-  pipe,
-  action
-}: IAction): string {
-  return `${piceOfStore}/${pipe}:${action}`;
-}
-
-function createReduxDevtoolsMiddleware(
-  devtools: IReduxDevtoolsExtenstionInstance
-) {
-  return function (next: (action: IAction) => void) {
-    return function (action: IAction) {
-      const actionName = formateReduxDevtoolsActionName(action);
-      devtools.send(actionName, action.state);
-      next(action);
-    };
-  };
-}
-
-export function reduxDevtoolsUpgrade<T extends IRPoSBuilders>(
-  createStore: IStatirCreateStore<T>
-) {
-  return function (config: IStatirConfig<T>) {
-    if (window && window.__REDUX_DEVTOOLS_EXTENSION__) {
-      const devtools = window.__REDUX_DEVTOOLS_EXTENSION__.connect();
-      const middleware = createReduxDevtoolsMiddleware(devtools);
-
-      const nextConfig: IStatirConfig<T> = {
-        ...config,
-        middlewares: [...(config.middlewares || []), middleware]
-      };
-
-      const upgradedStore = createStore(nextConfig);
-      devtools.init(upgradedStore.state);
-      return upgradedStore;
-    }
-
-    const store = createStore(config);
-    return store;
-  };
 }

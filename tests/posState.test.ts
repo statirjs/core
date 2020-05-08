@@ -15,7 +15,7 @@ describe('Testing pice of store state', () => {
         () => {},
         () => {}
       )
-    ).toThrow();
+    ).not.toThrow();
 
     expect(() =>
       createPiceOfStore(() => posState)(
