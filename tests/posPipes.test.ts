@@ -31,4 +31,28 @@ describe('Testing pice of store pipes', () => {
       )
     ).toThrow();
   });
+
+  test('pipe return value', () => {
+    expect(
+      parsePipes(
+        {
+          testPipe: {
+            push(state: any, payload: number) {
+              return {
+                ...state,
+                count: payload
+              };
+            }
+          }
+        } as any,
+        {
+          testPipe: {
+            count: 0
+          }
+        },
+        () => {},
+        'testPipe'
+      )['testPipe'](1)
+    ).toBe(undefined);
+  });
 });

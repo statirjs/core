@@ -5,6 +5,7 @@
 3. Added pice state test
 4. Added createPiceOfState validations
 5. Added createStore validations
+6. Added pice pipes test
 
 # 0.2.4 (May 5, 2020)
 

@@ -21,7 +21,8 @@
 - [x] Add store config test
 - [x] Add pice config test
 - [x] Add pice state test
-- [ ] Add pice pipes test
+- [x] Add pice pipes test
+- [ ] Add pice pipe test
 - [ ] Add store state test
 - [ ] Add store dispatch test
 - [ ] Add store observers test
