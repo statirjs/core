@@ -8,6 +8,8 @@
 - [ ] Fix pipes tests
 - [ ] Update README
 - [ ] Create discord group
+- [ ] Add test coverage
+- [ ] Add pice actions test
 
 # MILESTONE v0.3.0
 
@@ -35,7 +37,7 @@
 - [x] Add store upgrades test
 - [x] Add store middlewares test
 - [ ] Redesign logo to black bo bordered
-- [ ] Create index.d.ts bundler script
+- [x] Create index.d.ts bundler script
 
 # MILESTONE v0.2.0
 

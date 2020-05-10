@@ -12,6 +12,7 @@
 10. Added store listners test
 11. Added store upgrades test
 12. Added store middlewares test
+13. Created index.d.ts bundler script
 
 # 0.2.4 (May 5, 2020)
 

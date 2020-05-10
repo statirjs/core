@@ -16,8 +16,10 @@
     "typescript:types": "npx tsc --emitDeclarationOnly --declarationDir types",
     "rollup:build": "npx rollup -c",
     "rollup:watch": "npx rollup -c -w",
-    "scripts:types": "bash ./scripts/types.sh",
-    "publish:clean": "npx rimraf dist types coverage"
+    "scripts:types": "node ./scripts/types.js",
+    "publish:clean": "npx rimraf dist types coverage",
+    "publish:check": "npm run prettier:check && npm run eslint:check && npm run typescript:check && npm run jest:test",
+    "publish:build": "npm run rollup:build && npm run typescript:types && npm run scripts:types && npm run publish:clean"
   },
   "repository": {
     "type": "git",
