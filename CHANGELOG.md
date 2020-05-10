@@ -6,6 +6,12 @@
 4. Added createPiceOfState validations
 5. Added createStore validations
 6. Added pice pipes test
+7. Added pice pipe test
+8. Added store state test
+9. Added store dispatch test
+10. Added store listners test
+11. Added store upgrades test
+12. Added store middlewares test
 
 # 0.2.4 (May 5, 2020)
 

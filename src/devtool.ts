@@ -43,7 +43,6 @@ export function reduxDevtoolsUpgrade<T extends IRPoSBuilders>(
       return upgradedStore;
     }
 
-    const store = createStore(config);
-    return store;
+    return createStore(config);
   };
 }

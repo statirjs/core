@@ -1,7 +1,13 @@
 # MILESTONE v0.4.0
 
+- [ ] Update pipes to async pipes
 - [ ] Add local plugins mechanism
 - [ ] Add pice of store actions
+- [ ] Github page
+- [ ] Add examples
+- [ ] Fix pipes tests
+- [ ] Update README
+- [ ] Create discord group
 
 # MILESTONE v0.3.0
 
@@ -22,13 +28,12 @@
 - [x] Add pice config test
 - [x] Add pice state test
 - [x] Add pice pipes test
-- [ ] Add pice pipe test
-- [ ] Add store state test
-- [ ] Add store dispatch test
-- [ ] Add store observers test
-- [ ] Add store upgrades test
-- [ ] Add store middlewares test
-- [ ] Rewrite scripts to js
+- [x] Add pice pipe test
+- [x] Add store state test
+- [x] Add store dispatch test
+- [x] Add store listners test
+- [x] Add store upgrades test
+- [x] Add store middlewares test
 - [ ] Redesign logo to black bo bordered
 - [ ] Create index.d.ts bundler script
 

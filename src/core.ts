@@ -19,7 +19,8 @@ import {
   IRPoSs,
   IExtractStoreDispatch,
   IStatirConfig,
-  IStatirCreateStore
+  IStatirCreateStore,
+  IStatirUpgrade
 } from './types';
 import { warning } from './warning';
 import { reduxDevtoolsUpgrade } from './devtool';
@@ -30,7 +31,7 @@ const pipeDone = <T>(state: T) => state;
 
 const pipeFail = <T>(state: T) => state;
 
-function createUpdateAction<T>(
+export function createUpdateAction<T>(
   state: T,
   payload: IPayload,
   piceOfStateName: string,
@@ -141,7 +142,7 @@ export function createPiceOfStore<T, K extends IPoS<T>>(
   };
 }
 
-function createBlankStore<T>(initState: T): IStatirStore<T> {
+export function createBlankStore<T>(initState: T): IStatirStore<T> {
   return {
     state: initState,
     dispatch: {},
@@ -152,7 +153,7 @@ function createBlankStore<T>(initState: T): IStatirStore<T> {
   };
 }
 
-function extractState<T extends IRPoSBuilders>(
+export function extractState<T extends IRPoSBuilders>(
   pices: T
 ): IExtractStoreState<T> {
   return Object.keys(pices).reduce(
@@ -164,7 +165,10 @@ function extractState<T extends IRPoSBuilders>(
   );
 }
 
-function createPushActionTail<T>(state: T, listners: IStoreListner<T>[]) {
+export function createPushActionTail<T>(
+  state: T,
+  listners: IStoreListner<T>[]
+) {
   return function (action: IAction) {
     const nextState = {
       ...state,
@@ -179,20 +183,28 @@ function createPushActionTail<T>(state: T, listners: IStoreListner<T>[]) {
   };
 }
 
-function createPushAction<T>(
+export function composeMiddlewares(
+  middlewares: IStatirMiddleware[],
+  tail: IPushAction
+): IPushAction {
+  return middlewares.reduce((acc, next) => {
+    const result = next(acc);
+    return result;
+  }, tail);
+}
+
+export function createPushAction<T>(
   state: T,
   listners: IStoreListner<T>[],
   middlewares: IStatirMiddleware[] = []
 ) {
   const pushActionTail = createPushActionTail(state, listners);
-  const pushAction = middlewares.reduce(
-    (acc, next) => next(acc),
-    pushActionTail
-  );
+  const pushAction = composeMiddlewares(middlewares, pushActionTail);
+
   return pushAction;
 }
 
-function extractPices<T>(
+export function extractPices<T>(
   state: T,
   dispatch: IDispatch,
   pushAction: IPushAction,
@@ -207,7 +219,7 @@ function extractPices<T>(
   );
 }
 
-function updateDispatcher(pices: IRPoSs, dispatch: IDispatch) {
+export function updateDispatcher(pices: IRPoSs, dispatch: IDispatch) {
   const res = Object.keys(pices)
     .map((key) => ({
       [key]: pices[key].pipes
@@ -223,7 +235,7 @@ function updateDispatcher(pices: IRPoSs, dispatch: IDispatch) {
   Object.assign(dispatch, res);
 }
 
-function initStore<T extends IRPoSBuilders>(
+export function initStore<T extends IRPoSBuilders>(
   config: IStatirConfig<T>
 ): IStatirStore<IExtractStoreState<T>, IExtractStoreDispatch<T>> {
   const initState = extractState(config.pices);
@@ -246,6 +258,34 @@ function initStore<T extends IRPoSBuilders>(
   return store;
 }
 
+export function warningUpgrades(createStore: IStatirCreateStore<any>) {
+  const test = createPiceOfStore(() => ({
+    state: {
+      count: 0
+    }
+  }));
+
+  const store = createStore({
+    pices: {
+      test
+    }
+  });
+
+  warning([[!store, 'Upgrade must return store']]);
+}
+
+export function composeUpgrades<T extends IRPoSBuilders>(
+  upgrades: IStatirUpgrade<T>[],
+  tail: IStatirCreateStore<T>
+) {
+  return upgrades.reduce((acc, next) => {
+    const result = next(acc);
+    warningUpgrades(result);
+
+    return result;
+  }, tail);
+}
+
 export function createStore<T extends IRPoSBuilders>(
   config: IStatirConfig<T>
 ): IStatirStore<IExtractStoreState<T>, IExtractStoreDispatch<T>> {
@@ -257,10 +297,7 @@ export function createStore<T extends IRPoSBuilders>(
   const upgrades = config.upgrades || [];
   const upgradesWithDevtools = [reduxDevtoolsUpgrade, ...upgrades];
   const upgradeTail: IStatirCreateStore<T> = initStore;
-  const upgradedInitStore = upgradesWithDevtools.reduce(
-    (acc, next) => next(acc),
-    upgradeTail
-  );
+  const upgradedInitStore = composeUpgrades(upgradesWithDevtools, upgradeTail);
 
   return upgradedInitStore(config);
 }
