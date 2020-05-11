@@ -1,6 +1,6 @@
 {
   "name": "@statirjs/core",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Minimalistic state manager",
   "main": "./build/cjs/index.js",
   "browser": "./build/umd/index.js",
