@@ -12,6 +12,7 @@ jobs:
   include:
     - stage: test
       script:
+        - npm run rollup:build
         - npm run publish:check
     - stage: deploy
       if:
