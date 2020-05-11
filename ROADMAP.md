@@ -5,16 +5,17 @@
 - [ ] Add pice of store actions
 - [ ] Github page
 - [ ] Add examples
-- [ ] Fix pipes tests
-- [ ] Edit README
+- [ ] Update pipes tests to async
+- [ ] Extend and update README
 - [ ] Create discord group
-- [ ] Add test coverage
-- [ ] Add pice actions test
+- [x] Add test coverage
+- [ ] Add pice of store actions test
 - [x] Fix middlewares/upgrades tests amount
 - [x] Add bundle size counters
 - [ ] Add issue template
 - [ ] Add pr template
 - [ ] Add contributing guide
+- [ ] Add devtools test
 
 # MILESTONE v0.3.0
 
