@@ -20,7 +20,6 @@
 - [x] Add redux devtools
 - [x] Add createPiceOfState validations
 - [x] Add createStore validations
-- [ ] Edit pull request ci
 - [x] Add dev/prod rollup config
 - [x] Add prod minification
 - [x] Add es output
