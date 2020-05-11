@@ -10,12 +10,11 @@ stages:
 
 jobs:
   include:
-    - stage: test
+    - stage: check
       script:
         - npm run publish:check
     - stage: size
       script:
-        - npm run rollup:build
         - npm run size:check
     - stage: deploy
       if:
