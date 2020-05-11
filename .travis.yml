@@ -12,8 +12,11 @@ jobs:
   include:
     - stage: test
       script:
-        - npm run rollup:build
         - npm run publish:check
+    - stage: size
+      script:
+        - npm run rollup:build
+        - npm run size:check
     - stage: deploy
       if:
         - tag IS present
