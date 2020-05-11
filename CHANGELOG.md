@@ -13,6 +13,7 @@
 11. Added store upgrades test
 12. Added store middlewares test
 13. Created index.d.ts bundler script
+14. Update logo to black bordered
 
 # 0.2.4 (May 5, 2020)
 

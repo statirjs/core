@@ -10,6 +10,7 @@
 - [ ] Create discord group
 - [ ] Add test coverage
 - [ ] Add pice actions test
+- [ ] Fix middlewares/upgrades tests amount
 
 # MILESTONE v0.3.0
 
@@ -36,7 +37,7 @@
 - [x] Add store listners test
 - [x] Add store upgrades test
 - [x] Add store middlewares test
-- [ ] Redesign logo to black bo bordered
+- [x] Redesign logo to black bordered
 - [x] Create index.d.ts bundler script
 
 # MILESTONE v0.2.0
