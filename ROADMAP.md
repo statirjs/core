@@ -18,6 +18,8 @@
 
 # MILESTONE v0.3.0
 
+123123
+
 - [x] Add createPiceOfStore
 - [x] Add createStore
 - [x] Add middlewares mechanism
