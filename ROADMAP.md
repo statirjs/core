@@ -11,6 +11,7 @@
 - [ ] Add test coverage
 - [ ] Add pice actions test
 - [ ] Fix middlewares/upgrades tests amount
+- [ ] Add bundle size counter
 
 # MILESTONE v0.3.0
 
