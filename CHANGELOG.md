@@ -1,5 +1,7 @@
 # Dev
 
+1. Fixed middlewares/upgrades tests amount
+
 # 0.3.2 (May 11, 2020)
 
 1. Added bundle size counters

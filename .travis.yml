@@ -16,6 +16,9 @@ jobs:
     - stage: size
       script:
         - npm run size:check
+    - stage: coveralls
+      script:
+        - npm run publish:coverage
     - stage: deploy
       if:
         - tag IS present

@@ -10,7 +10,7 @@
 - [ ] Create discord group
 - [ ] Add test coverage
 - [ ] Add pice actions test
-- [ ] Fix middlewares/upgrades tests amount
+- [x] Fix middlewares/upgrades tests amount
 - [x] Add bundle size counters
 - [ ] Add issue template
 - [ ] Add pr template

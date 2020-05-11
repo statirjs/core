@@ -45,6 +45,11 @@ describe('Testing store middlewares', () => {
             return (action: IAction) => {
               next(action);
             };
+          },
+          (next: IPushAction) => {
+            return (action: IAction) => {
+              next(action);
+            };
           }
         ]
       })
@@ -55,6 +60,11 @@ describe('Testing store middlewares', () => {
     const store = createStore({
       pices: { piceOfState },
       middlewares: [
+        (next: IPushAction) => {
+          return (action: IAction) => {
+            next(action);
+          };
+        },
         (next: IPushAction) => {
           return (action: IAction) => {
             next(action);
@@ -70,6 +80,11 @@ describe('Testing store middlewares', () => {
     const store = createStore({
       pices: { piceOfState },
       middlewares: [
+        (next: IPushAction) => {
+          return (action: IAction) => {
+            next(action);
+          };
+        },
         (next: IPushAction) => {
           return (action: IAction) => {
             next(action);
@@ -116,9 +131,19 @@ describe('Testing store middlewares', () => {
           return (action: IAction) => {
             next(action);
           };
+        },
+        (next: IPushAction) => {
+          return (action: IAction) => {
+            next(action);
+          };
         }
       ],
       upgrades: [
+        ((createStore: any) => {
+          return (config: any) => {
+            return createStore(config);
+          };
+        }) as any,
         ((createStore: any) => {
           return (config: any) => {
             return createStore(config);

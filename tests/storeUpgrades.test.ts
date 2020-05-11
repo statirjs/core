@@ -58,6 +58,11 @@ describe('Testing store upgrades', () => {
           return (config: any) => {
             return createStore(config);
           };
+        }) as any,
+        ((createStore: any) => {
+          return (config: any) => {
+            return createStore(config);
+          };
         }) as any
       ]
     });
@@ -65,19 +70,15 @@ describe('Testing store upgrades', () => {
     expect(store.state.piceOfState.count).toEqual(0);
   });
 
-  interface IReduxDevtoolsExtenstionInstance {
-    init(state: any): void;
-    send(name: string, state: any): void;
-  }
-
-  interface IReduxDevtoolsExtenstion {
-    connect(config?: any): IReduxDevtoolsExtenstionInstance;
-  }
-
   test('dispatch safety', () => {
     const store = createStore({
       pices: { piceOfState },
       upgrades: [
+        ((createStore: any) => {
+          return (config: any) => {
+            return createStore(config);
+          };
+        }) as any,
         ((createStore: any) => {
           return (config: any) => {
             return createStore(config);
@@ -97,6 +98,11 @@ describe('Testing store upgrades', () => {
     const store = createStore({
       pices: { piceOfState },
       upgrades: [
+        ((createStore: any) => {
+          return (config: any) => {
+            return createStore(config);
+          };
+        }) as any,
         ((createStore: any) => {
           return (config: any) => {
             return createStore(config);
