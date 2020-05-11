@@ -1,5 +1,5 @@
 {
   "hooks": {
-    "pre-commit": "npm run prettier:check && npm run eslint:check && npm run typescript:check && npm run jest:test"
+    "pre-commit": "npm run publish:check"
   }
 }

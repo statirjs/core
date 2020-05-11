@@ -1,0 +1,14 @@
+{
+  "files": [
+    {
+      "path": "./build/es/index.mjs",
+      "maxSize": "5 kB",
+      "compression": "none"
+    },
+    {
+      "path": "./build/umd/index.min.js",
+      "maxSize": "5 kB",
+      "compression": "none"
+    }
+  ]
+}

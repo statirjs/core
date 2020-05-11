@@ -6,12 +6,15 @@
 - [ ] Github page
 - [ ] Add examples
 - [ ] Fix pipes tests
-- [ ] Update README
+- [ ] Edit README
 - [ ] Create discord group
 - [ ] Add test coverage
 - [ ] Add pice actions test
 - [ ] Fix middlewares/upgrades tests amount
 - [ ] Add bundle size counter
+- [ ] Add issue template
+- [ ] Add pr template
+- [ ] Add contributing guide
 
 # MILESTONE v0.3.0
 

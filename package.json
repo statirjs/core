@@ -8,6 +8,7 @@
   "types": "./index.d.ts",
   "scripts": {
     "project:clean": "npx rimraf build dist types index.d.ts coverage",
+    "bundlesize:check": "npx bundlesize",
     "prettier:write": "npx prettier --write src",
     "prettier:check": "npx prettier --check src",
     "eslint:check": "npx eslint --ext .ts src",
@@ -18,7 +19,7 @@
     "rollup:watch": "npx rollup -c -w",
     "scripts:types": "node ./scripts/types.js",
     "publish:clean": "npx rimraf dist types coverage",
-    "publish:check": "npm run prettier:check && npm run eslint:check && npm run typescript:check && npm run jest:test",
+    "publish:check": "npm run prettier:check && npm run eslint:check && npm run typescript:check && npm run jest:test && npm run bundlesize:check",
     "publish:build": "npm run rollup:build && npm run typescript:types && npm run scripts:types && npm run publish:clean"
   },
   "repository": {
@@ -44,6 +45,7 @@
     "@types/jest": "^25.2.1",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
+    "bundlesize": "^0.18.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-prettier": "^3.1.2",
