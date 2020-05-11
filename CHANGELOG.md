@@ -1,5 +1,7 @@
 # Dev
 
+# 0.3.2 (May 11, 2020)
+
 1. Added bundle size counters
 
 # 0.3.0 (May 11, 2020)
