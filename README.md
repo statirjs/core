@@ -2,6 +2,7 @@
 
 [![build status](https://travis-ci.com/statirjs/core.svg?branch=dev)](https://travis-ci.com/github/statirjs/core)
 [![npm version](https://img.shields.io/npm/v/@statirjs/core)](https://www.npmjs.com/package/@statirjs/core)
+[![gzip](https://img.shields.io/bundlephobia/minzip/@statirjs/core?label=gzip)](https://bundlephobia.com/result?p=@statirjs/core)
 
 "statirjs/core" is a minimalistic, framework/platform agnostic state manager
 

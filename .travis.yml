@@ -5,7 +5,7 @@ dist: xenial
 cache: npm
 
 stages:
-  - test
+  - check
   - deploy
 
 jobs:
@@ -13,9 +13,6 @@ jobs:
     - stage: check
       script:
         - npm run publish:check
-    - stage: size
-      script:
-        - npm run size:check
     - stage: deploy
       if:
         - tag IS present

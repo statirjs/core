@@ -1,14 +1,20 @@
 [
   {
-    "path": "./build/es/index.mjs",
+    "path": "./build/cjs/index.js",
     "limit": "5 KB",
-    "gzip": false,
+    "gzip": true,
     "brotli": false
   },
   {
-    "path": "./build/umd/index.min.js",
+    "path": "./build/es/index.js",
     "limit": "5 KB",
-    "gzip": false,
+    "gzip": true,
+    "brotli": false
+  },
+  {
+    "path": "./build/umd/index.js",
+    "limit": "5 KB",
+    "gzip": true,
     "brotli": false
   }
 ]

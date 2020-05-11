@@ -11,7 +11,7 @@
 - [ ] Add test coverage
 - [ ] Add pice actions test
 - [ ] Fix middlewares/upgrades tests amount
-- [ ] Add bundle size counter
+- [x] Add bundle size counters
 - [ ] Add issue template
 - [ ] Add pr template
 - [ ] Add contributing guide
