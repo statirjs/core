@@ -3,6 +3,7 @@
 1. Fixed middlewares/upgrades tests amount
 2. Added test coverage
 3. Added project coveralls
+4. Refactoring code by dirs
 
 # 0.3.2 (May 11, 2020)
 

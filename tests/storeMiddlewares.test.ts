@@ -1,5 +1,6 @@
-import { createStore, createPiceOfStore } from '../src/core';
-import { IPushAction, IAction, IStatirMiddleware } from '../src/types';
+import { createStore } from '../src/core/store';
+import { createPiceOfStore } from '../src/core/piceOfStore';
+import { IPushAction, IAction, IStatirMiddleware } from '../src/typing';
 
 const piceOfState = createPiceOfStore(() => ({
   state: {

@@ -1,4 +1,4 @@
-import { parsePipe } from '../src/core';
+import { parsePipe } from '../src/core/piceOfStore';
 
 describe('Testing pice of store pipe', () => {
   test('invalid config', () => {

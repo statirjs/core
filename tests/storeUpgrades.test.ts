@@ -1,4 +1,5 @@
-import { createStore, createPiceOfStore } from '../src/core';
+import { createStore } from '../src/core/store';
+import { createPiceOfStore } from '../src/core/piceOfStore';
 
 const piceOfState = createPiceOfStore(() => ({
   state: {

@@ -3,7 +3,7 @@ import {
   IRPoSBuilders,
   IStatirCreateStore,
   IStatirConfig
-} from './types';
+} from '../typing';
 
 function formateReduxDevtoolsActionName({
   piceOfStore,
@@ -27,7 +27,7 @@ function createReduxDevtoolsMiddleware(
 
 export function reduxDevtoolsUpgrade<T extends IRPoSBuilders>(
   createStore: IStatirCreateStore<T>
-) {
+): IStatirCreateStore<T> {
   return function (config: IStatirConfig<T>) {
     if (window && window.__REDUX_DEVTOOLS_EXTENSION__) {
       const devtools = window.__REDUX_DEVTOOLS_EXTENSION__.connect();

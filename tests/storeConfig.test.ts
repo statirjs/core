@@ -1,4 +1,4 @@
-import { createStore } from '../src';
+import { createStore } from '../src/core/store';
 
 describe('Testing createStore config', () => {
   test('whithout config', () => {

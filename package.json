@@ -10,6 +10,7 @@
     "project:clean": "npx rimraf build dist types index.d.ts coverage",
     "prettier:write": "npx prettier --write src",
     "prettier:check": "npx prettier --check src",
+    "prettier:declaration": "npx prettier --write index.d.ts",
     "eslint:check": "npx eslint --ext .ts src",
     "jest:test": "npx jest tests",
     "jest:coverage": "npx jest tests --coverage",
@@ -23,7 +24,7 @@
     "publish:clean": "npx rimraf dist types coverage",
     "publish:coverage": "npm run jest:coverage && npm run coveralls:send",
     "publish:check": "npm run prettier:check && npm run eslint:check && npm run typescript:check && npm run jest:test",
-    "publish:build": "npm run rollup:build && npm run typescript:types && npm run scripts:types && npm run publish:clean"
+    "publish:build": "npm run rollup:build && npm run typescript:types && npm run scripts:types && npm run publish:clean && npm run prettier:declaration"
   },
   "repository": {
     "type": "git",

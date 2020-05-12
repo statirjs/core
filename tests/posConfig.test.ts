@@ -1,4 +1,4 @@
-import { createPiceOfStore } from '../src';
+import { createPiceOfStore } from '../src/core/piceOfStore';
 
 const posState = {
   state: {

@@ -5,10 +5,11 @@ const TYPES_DIR = './types';
 const TARGET_FILE = './index.d.ts';
 
 const FILES_WHITELIST = [
-  'types.d.ts',
-  'warning.d.ts',
-  'core.d.ts',
-  'devtool.d.ts'
+  'typing/index.d.ts',
+  'utils/index.d.ts',
+  'core/piceOfStore.d.ts',
+  'core/store.d.ts',
+  'devtool/index.d.ts'
 ];
 
 function deleteImportStatement(file) {

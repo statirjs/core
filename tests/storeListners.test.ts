@@ -1,4 +1,5 @@
-import { createPiceOfStore, createStore } from '../src/core';
+import { createStore } from '../src/core/store';
+import { createPiceOfStore } from '../src/core/piceOfStore';
 
 describe('Testing store listners', () => {
   test('listners subscribe', () => {

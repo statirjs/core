@@ -1,4 +1,4 @@
-import { parsePipes } from '../src/core';
+import { parsePipes } from '../src/core/piceOfStore';
 
 describe('Testing pice of store pipes', () => {
   test('null pipes', () => {

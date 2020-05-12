@@ -16,6 +16,9 @@
 - [ ] Add pr template
 - [ ] Add contributing guide
 - [ ] Add devtools test
+- [ ] Add create pice of store factory
+- [ ] Add plugins tests
+- [ ] Add factory tests
 
 # MILESTONE v0.3.0
 

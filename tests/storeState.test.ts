@@ -1,4 +1,5 @@
-import { createStore, createPiceOfStore } from '../src/core';
+import { createStore } from '../src/core/store';
+import { createPiceOfStore } from '../src/core/piceOfStore';
 
 describe('Testing store state', () => {
   test('state init', () => {
