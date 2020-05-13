@@ -26,7 +26,7 @@ export type IPayload = any;
 export interface IAction<T extends any = any> {
   piceOfStore: string;
   pipe: string;
-  action: string;
+  action?: string;
   payload: IPayload;
   state: T;
 }
@@ -50,17 +50,36 @@ export enum PIPE_ACTIONS {
 export enum POS_FIELDS {
   NAME = 'name',
   STATE = 'state',
-  PIPES = 'pipes'
+  PIPES = 'pipes',
+  ACTIONS = 'actions'
 }
 
 export type IPoSPipes<T, K extends string = string> = {
   [X in K]: IPoSPipe<T>;
 };
 
+export type IPoSAction<T extends any = any, K = any> = (
+  state: T,
+  payload: K
+) => T;
+
+export type IPoSActions<T, K extends string = string> = {
+  [X in K]: IPoSAction<T>;
+};
+
 export interface IPoS<T extends any = any> {
   state: T;
+  actions?: IPoSActions<T>;
   pipes?: IPoSPipes<T>;
 }
+
+export type IRExtractActionsPayload<T extends IPoSAction> = T extends () => void
+  ? null
+  : T extends (state: infer S) => infer S
+  ? null
+  : T extends (state: infer S, payload: infer K) => infer S
+  ? K
+  : null;
 
 export type IRExtractPushPayload<
   T extends IPoSPipe
@@ -130,9 +149,19 @@ export type IRExtractPipes<T extends IPoS[POS_FIELDS.PIPES]> = {
   [X in keyof T]: IRExtractPipe<NonNullable<T>[X]>;
 };
 
+export type IRExtractAction<
+  T extends NonNullable<IPoS[POS_FIELDS.ACTIONS]>[string],
+  K = NonNullable<IRExtractActionsPayload<T>>
+> = [K] extends [void] ? () => void : (payload: K) => void;
+
+export type IRExtractActions<T extends IPoS[POS_FIELDS.ACTIONS]> = {
+  [X in keyof T]: IRExtractAction<NonNullable<T>[X]>;
+};
+
 export interface IRPoS<T extends IPoS = IPoS> {
   state: T[POS_FIELDS.STATE];
   pipes: IRExtractPipes<T[POS_FIELDS.PIPES]>;
+  actions: IRExtractActions<T[POS_FIELDS.ACTIONS]>;
 }
 
 export interface IRPoSs {
@@ -184,5 +213,6 @@ export type IExtractStoreState<T extends IRPoSBuilders> = {
 };
 
 export type IExtractStoreDispatch<T extends IRPoSBuilders> = {
-  [X in keyof T]: ReturnType<T[X]>[POS_FIELDS.PIPES];
+  [X in keyof T]: ReturnType<T[X]>[POS_FIELDS.PIPES] &
+    ReturnType<T[X]>[POS_FIELDS.ACTIONS];
 };

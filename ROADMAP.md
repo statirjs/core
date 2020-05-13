@@ -2,7 +2,7 @@
 
 - [ ] Update pipes to async pipes
 - [ ] Add local plugins mechanism
-- [ ] Add pice of store actions
+- [x] Add pice of store actions
 - [ ] Github page
 - [ ] Add examples
 - [ ] Update pipes tests to async

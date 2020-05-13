@@ -4,6 +4,7 @@
 2. Added test coverage
 3. Added project coveralls
 4. Refactoring code by dirs
+5. Added pice of store actions
 
 # 0.3.2 (May 11, 2020)
 

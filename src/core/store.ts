@@ -97,7 +97,10 @@ export function extractPices<T>(
 export function updateDispatcher(pices: IRPoSs, dispatch: IDispatch) {
   const res = Object.keys(pices)
     .map((key) => ({
-      [key]: pices[key].pipes
+      [key]: {
+        ...pices[key].pipes,
+        ...pices[key].actions
+      }
     }))
     .reduce(
       (acc, next) => ({

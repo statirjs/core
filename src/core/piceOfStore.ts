@@ -10,7 +10,9 @@ import {
   IRExtractPipe,
   IRExtractPipes,
   IRPoSBuilder,
-  IPoSBuilder
+  IPoSBuilder,
+  IRExtractAction,
+  IRExtractActions
 } from '../typing';
 import { warning } from '../utils';
 
@@ -25,7 +27,7 @@ export function createUpdateAction<T>(
   payload: IPayload,
   piceOfStateName: string,
   pipeName: string,
-  actionName: string
+  actionName?: string
 ): IAction<T> {
   return {
     state,
@@ -38,7 +40,7 @@ export function createUpdateAction<T>(
 
 export function parsePipe<
   T,
-  K extends NonNullable<IPoS[POS_FIELDS.PIPES]>[string]
+  K extends NonNullable<IPoS<T>[POS_FIELDS.PIPES]>[string]
 >(
   pipe: K,
   rootState: IRootState,
@@ -70,16 +72,16 @@ export function parsePipe<
 
     try {
       const data = core(statePush, payload, rootState);
-      const stateDone = done(statePush, data, payload, rootState);
+      const stateDone = done<T>(statePush, data, payload, rootState);
       pushCurrentAction(stateDone, payload, PIPE_ACTIONS.DONE);
     } catch (err) {
-      const stateFail = fail(statePush, err, payload, rootState);
+      const stateFail = fail<T>(statePush, err, payload, rootState);
       pushCurrentAction(stateFail, payload, PIPE_ACTIONS.FAIL);
     }
   } as IRExtractPipe<K>;
 }
 
-export function parsePipes<T, K extends NonNullable<IPoS[POS_FIELDS.PIPES]>>(
+export function parsePipes<T, K extends NonNullable<IPoS<T>[POS_FIELDS.PIPES]>>(
   pipes: K,
   rootState: IRootState,
   pushAction: IPushAction<T>,
@@ -104,6 +106,61 @@ export function parsePipes<T, K extends NonNullable<IPoS[POS_FIELDS.PIPES]>>(
   );
 }
 
+export function parseAction<
+  T,
+  K extends NonNullable<IPoS<T>[POS_FIELDS.ACTIONS]>[string]
+>(
+  action: K,
+  rootState: IRootState,
+  pushAction: IPushAction<T>,
+  piceOfStateName: string,
+  actionName: string
+): IRExtractAction<K> {
+  function pushCurrentAction(state: T, payload: IPayload) {
+    const action = createUpdateAction(
+      state,
+      payload,
+      piceOfStateName,
+      actionName
+    );
+    pushAction(action);
+  }
+
+  return function (payload: IPayload) {
+    const statePoS = rootState[piceOfStateName];
+    const state = action(statePoS, payload);
+    pushCurrentAction(state, payload);
+  } as IRExtractAction<K>;
+}
+
+export function parseActions<
+  T,
+  K extends NonNullable<IPoS<T>[POS_FIELDS.ACTIONS]>
+>(
+  actions: K,
+  rootState: IRootState,
+  pushAction: IPushAction<T>,
+  piceOfStateName: string
+): IRExtractActions<K> {
+  warning([
+    [typeof actions !== 'object', 'Pice of store actions must be a object']
+  ]);
+
+  return Object.keys(actions).reduce(
+    (acc, actionName) => ({
+      ...acc,
+      [actionName]: parseAction(
+        actions[actionName],
+        rootState,
+        pushAction,
+        piceOfStateName,
+        actionName
+      )
+    }),
+    {} as IRExtractActions<K>
+  );
+}
+
 export function createPiceOfStore<T, K extends IPoS<T>>(
   builder: IPoSBuilder<K>
 ): IRPoSBuilder<T, K> {
@@ -117,7 +174,7 @@ export function createPiceOfStore<T, K extends IPoS<T>>(
       [typeof builder !== 'function', 'Pice of store is not a function']
     ]);
 
-    const { pipes = {}, state } = builder(dispatch);
+    const { pipes = {}, actions = {}, state } = builder(dispatch);
 
     warning([
       [!state, `Pice of store state is required`],
@@ -126,7 +183,8 @@ export function createPiceOfStore<T, K extends IPoS<T>>(
 
     return {
       state,
-      pipes: parsePipes(pipes, rootState, pushAction, name)
+      pipes: parsePipes(pipes, rootState, pushAction, name),
+      actions: parseActions(actions, rootState, pushAction, name)
     };
   };
 }
