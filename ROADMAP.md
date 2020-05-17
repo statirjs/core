@@ -19,6 +19,8 @@
 - [ ] Add create pice of store factory
 - [ ] Add plugins tests
 - [ ] Add factory tests
+- [x] Rewrite whole code to new types
+- [ ] Reweite whole tests
 
 # MILESTONE v0.3.0
 

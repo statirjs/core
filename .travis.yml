@@ -6,6 +6,8 @@ cache: npm
 
 stages:
   - check
+  - size
+  - coveralls
   - deploy
 
 jobs:

@@ -1,2 +1,2 @@
-export { createPiceOfStore } from './core/piceOfStore';
-export { createStore } from './core/store';
+export { createForme } from './forme/creator';
+export { initStore } from './store/creator';

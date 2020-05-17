@@ -4,13 +4,7 @@ const TYPES_DIR = './types';
 
 const TARGET_FILE = './index.d.ts';
 
-const FILES_WHITELIST = [
-  'typing/index.d.ts',
-  'utils/index.d.ts',
-  'core/piceOfStore.d.ts',
-  'core/store.d.ts',
-  'devtool/index.d.ts'
-];
+const FILES_WHITELIST = ['typing/internal.d.ts', 'typing/external.d.ts'];
 
 function deleteImportStatement(file) {
   const matchs = file.match(/import.*;/) || [];
@@ -24,6 +18,12 @@ function deleteExportStatement(file) {
   return matchs.reduce((acc, next) => acc.replace(next, ''), file);
 }
 
+function cleanReImport(file) {
+  const matchs = file.match(/S\./g) || [];
+
+  return matchs.reduce((acc, next) => acc.replace(next, ''), file);
+}
+
 function getFiles() {
   return FILES_WHITELIST.map((name) => {
     const file = fs.readFileSync(TYPES_DIR + '/' + name, 'utf-8');
@@ -32,7 +32,9 @@ function getFiles() {
 
     const unexportedFile = deleteExportStatement(unimportedFile);
 
-    return unexportedFile;
+    const cleanReImportFile = cleanReImport(unexportedFile);
+
+    return cleanReImportFile;
   });
 }
 
