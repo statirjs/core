@@ -80,7 +80,7 @@ describe('Test createForme', () => {
     });
   });
 
-  test('updateState use', () => {
+  test('updateState use', async () => {
     const updateState = jest.fn(() => {});
 
     const reFormeBuilder = createForme(
@@ -95,7 +95,7 @@ describe('Test createForme', () => {
         },
         pipes: {
           testPipe: {
-            push(state, payload: number) {
+            async push(state, payload: number) {
               return {
                 ...state,
                 test: state.test + payload
@@ -137,7 +137,7 @@ describe('Test createForme', () => {
 
     const testPipe = parseForme.pipes.testPipe as any;
 
-    testPipe(0);
+    await testPipe(0);
 
     expect(mock.length).toEqual(3);
 
@@ -153,7 +153,7 @@ describe('Test createForme', () => {
       }
     });
 
-    testPipe(1);
+    await testPipe(1);
 
     expect(mock.length).toEqual(5);
 

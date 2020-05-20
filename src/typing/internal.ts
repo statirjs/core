@@ -53,10 +53,10 @@ export type UpdateState<T extends State = State> = (update: Update<T>) => void;
 // Forme types
 
 export interface Pipe<T extends State = State> {
-  push(state: T, payload: Payload): T;
-  core?(state: T, payload: Payload): Data;
-  done?(state: T, payload: Payload, data: Data): T;
-  fail?(state: T, payload: Payload, error: Error): T;
+  push(state: T, payload: Payload): Promise<T> | T;
+  core?(state: T, payload: Payload): Promise<Data> | Data;
+  done?(state: T, payload: Payload, data: Data): Promise<T> | T;
+  fail?(state: T, payload: Payload, error: Error): Promise<T> | T;
 }
 
 export type Pipes<T extends State = State> = Record<string, Pipe<T>>;
@@ -72,7 +72,7 @@ export interface Forme<T extends State = State> {
 
 export type FormeBuilder<T extends Forme = Forme> = (dispatch: Dispatch) => T;
 
-export type RePipe = (payload?: Payload) => void;
+export type RePipe = (payload?: Payload) => Promise<void>;
 
 export type RePipes = Record<string, RePipe>;
 
@@ -80,47 +80,67 @@ export type ReAction = (payload?: Payload) => void;
 
 export type ReActions = Record<string, ReAction>;
 
-export type ExtractPush<T extends Pipe> = T[PipeSteps.Push] extends () => void
+export type ExtractPush<
+  T extends Pipe
+> = T[PipeSteps.Push] extends () => Promise<void> | void
   ? null
-  : T[PipeSteps.Push] extends (state: infer S) => infer S
+  : T[PipeSteps.Push] extends (state: infer S) => Promise<infer S> | infer S
   ? null
-  : T[PipeSteps.Push] extends (state: infer S, payload: infer K) => infer S
+  : T[PipeSteps.Push] extends (
+      state: infer S,
+      payload: infer K
+    ) => Promise<infer S> | infer S
   ? K
   : null;
 
-export type ExtractCore<T extends Pipe> = T[PipeSteps.Core] extends () => void
+export type ExtractCore<
+  T extends Pipe
+> = T[PipeSteps.Core] extends () => Promise<void> | void
   ? null
-  : T[PipeSteps.Core] extends (state: infer S) => infer P
+  : T[PipeSteps.Core] extends (state: infer S) => Promise<infer P> | infer P
   ? null
-  : T[PipeSteps.Core] extends (state: infer S, payload: infer K) => infer P
+  : T[PipeSteps.Core] extends (
+      state: infer S,
+      payload: infer K
+    ) => Promise<infer P> | infer P
   ? K
   : null;
 
-export type ExtractDone<T extends Pipe> = T[PipeSteps.Done] extends () => void
+export type ExtractDone<
+  T extends Pipe
+> = T[PipeSteps.Done] extends () => Promise<void> | void
   ? null
-  : T[PipeSteps.Done] extends (state: infer S) => infer S
+  : T[PipeSteps.Done] extends (state: infer S) => Promise<infer S> | infer S
   ? null
-  : T[PipeSteps.Done] extends (state: infer S, payload: infer P) => infer S
+  : T[PipeSteps.Done] extends (
+      state: infer S,
+      payload: infer P
+    ) => Promise<infer S> | infer S
   ? P
   : T[PipeSteps.Done] extends (
       state: infer S,
       payload: infer P,
       data: infer K
-    ) => infer S
+    ) => Promise<infer S> | infer S
   ? P
   : null;
 
-export type ExtractFail<T extends Pipe> = T[PipeSteps.Fail] extends () => void
+export type ExtractFail<
+  T extends Pipe
+> = T[PipeSteps.Fail] extends () => Promise<void> | void
   ? null
-  : T[PipeSteps.Fail] extends (state: infer S) => infer S
+  : T[PipeSteps.Fail] extends (state: infer S) => Promise<infer S> | infer S
   ? null
-  : T[PipeSteps.Fail] extends (state: infer S, payload: infer P) => infer S
+  : T[PipeSteps.Fail] extends (
+      state: infer S,
+      payload: infer P
+    ) => Promise<infer S> | infer S
   ? P
   : T[PipeSteps.Fail] extends (
       state: infer S,
       payload: infer P,
       error: infer K
-    ) => infer S
+    ) => Promise<infer S> | infer S
   ? P
   : null;
 
@@ -131,8 +151,8 @@ export type ExtractPipePayload<T extends Pipe> = NonNullable<
 export type ExtractPipe<T extends Pipe = Pipe, K = ExtractPipePayload<T>> = [
   K
 ] extends [void]
-  ? () => void
-  : (payload: K) => void;
+  ? () => Promise<void>
+  : (payload: K) => Promise<void>;
 
 export type ExtractPipes<T extends Pipes = Pipes> = {
   [X in keyof T]: ExtractPipe<T[X]>;

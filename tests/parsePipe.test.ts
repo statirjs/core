@@ -7,7 +7,7 @@ describe('Test parsePipe', () => {
     ).toThrow();
   });
 
-  test('return value', () => {
+  test('return value', async () => {
     const parsedPipe = parsePipe(
       {
         push(state: any) {
@@ -24,10 +24,10 @@ describe('Test parsePipe', () => {
       'testAction'
     );
 
-    expect(parsedPipe()).toBeUndefined();
+    expect(await parsedPipe()).toBeUndefined();
   });
 
-  test('update calls', () => {
+  test('update calls', async () => {
     const updateState = jest.fn(() => {});
 
     const parsedPipe = parsePipe(
@@ -46,7 +46,7 @@ describe('Test parsePipe', () => {
       'testAction'
     );
 
-    parsedPipe();
+    await parsedPipe();
 
     const mock = updateState.mock.calls as any;
 
@@ -66,12 +66,12 @@ describe('Test parsePipe', () => {
 
     expect(mock[1][0].actionName).toEqual('testAction:done');
 
-    parsedPipe();
+    await parsedPipe();
 
     expect(updateState.mock.calls.length).toEqual(4);
   });
 
-  test('rootState save', () => {
+  test('rootState save', async () => {
     const updateState = jest.fn(() => {});
 
     const parsedPipe = parsePipe(
@@ -93,7 +93,7 @@ describe('Test parsePipe', () => {
       'testAction'
     );
 
-    parsedPipe(1);
+    await parsedPipe(1);
 
     const mock = updateState.mock.calls as any;
 
@@ -101,14 +101,14 @@ describe('Test parsePipe', () => {
 
     expect(mock[1][0].state).toEqual({ test: 2 });
 
-    parsedPipe(2);
+    await parsedPipe(2);
 
     expect(mock[2][0].state).toEqual({ test: 3 });
 
     expect(mock[3][0].state).toEqual({ test: 3 });
   });
 
-  test('done pipe', () => {
+  test('done pipe', async () => {
     const push = jest.fn((state: any, payload: number) => {
       return {
         ...state,
@@ -145,7 +145,7 @@ describe('Test parsePipe', () => {
       'testAction'
     );
 
-    parsedPipe(0);
+    await parsedPipe(0);
 
     const pushMock = push.mock.calls as any;
 
@@ -171,7 +171,7 @@ describe('Test parsePipe', () => {
 
     expect(doneMock[0][2]).toEqual(1);
 
-    parsedPipe(1);
+    await parsedPipe(1);
 
     expect(pushMock.length).toEqual(2);
 
@@ -190,7 +190,7 @@ describe('Test parsePipe', () => {
     expect(doneMock[1][2]).toEqual(2);
   });
 
-  test('fail pipe', () => {
+  test('fail pipe', async () => {
     const push = jest.fn((state: any, payload: number) => {
       return {
         ...state,
@@ -227,7 +227,7 @@ describe('Test parsePipe', () => {
       'testAction'
     );
 
-    parsedPipe(0);
+    await parsedPipe(0);
 
     const pushMock = push.mock.calls as any;
 
@@ -253,7 +253,7 @@ describe('Test parsePipe', () => {
 
     expect(failMock[0][2]).toEqual(new Error('test error'));
 
-    parsedPipe(1);
+    await parsedPipe(1);
 
     expect(pushMock.length).toEqual(2);
 

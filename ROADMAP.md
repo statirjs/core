@@ -1,11 +1,11 @@
 # MILESTONE v0.4.0
 
-- [ ] Update pipes to async pipes
+- [x] Update pipes to async pipes
 - [ ] Add local plugins mechanism
 - [x] Add pice of store actions
 - [ ] Github page
 - [ ] Add examples
-- [ ] Update pipes tests to async
+- [x] Update pipes tests to async
 - [ ] Extend and update README
 - [ ] Create discord group
 - [x] Add test coverage
@@ -21,6 +21,7 @@
 - [ ] Add factory tests
 - [x] Rewrite whole code to new types
 - [ ] Reweite whole tests
+- [x] Extract promise payload type from pipe
 
 # MILESTONE v0.3.0
 

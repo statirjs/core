@@ -5,6 +5,8 @@
 3. Added project coveralls
 4. Refactoring code by dirs
 5. Added pice of store actions
+6. Added createForme tests
+7. Extracted promise payload type from pipe
 
 # 0.3.2 (May 11, 2020)
 

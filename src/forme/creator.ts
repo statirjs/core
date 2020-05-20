@@ -28,17 +28,17 @@ export function parsePipe<T extends S.Pipe>(
     updateState({ state, rootState, formeName, actionName: name });
   }
 
-  return function (payload: S.Payload) {
+  return async function (payload: S.Payload) {
     const formeState = rootState[formeName];
-    const pushState = push(formeState, payload);
+    const pushState = await push(formeState, payload);
     update(pushState, S.PipeSteps.Push);
 
     try {
-      const data = core(pushState, payload);
-      const doneState = done(pushState, payload, data);
+      const data = await core(pushState, payload);
+      const doneState = await done(pushState, payload, data);
       update(doneState, S.PipeSteps.Done);
     } catch (err) {
-      const failState = fail(pushState, payload, err);
+      const failState = await fail(pushState, payload, err);
       update(failState, S.PipeSteps.Fail);
     }
   };
