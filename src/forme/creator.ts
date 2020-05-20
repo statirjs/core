@@ -1,4 +1,5 @@
 import * as S from '../typing/internal';
+import { warning } from '../utils/warning';
 
 // Parse Pipes
 
@@ -104,6 +105,17 @@ export function createForme<T extends S.State, K extends S.Forme<T>>(
       formeName: string
     ): S.ReForme {
       const { actions = {}, pipes = {} } = builder?.(dispatch) || {};
+
+      warning([
+        [
+          typeof actions !== 'object',
+          `Frome ${formeName}: actions must be a object`
+        ],
+        [
+          typeof pipes !== 'object',
+          `Forme ${formeName}: pipes must be a object`
+        ]
+      ]);
 
       return {
         actions: parseActions(actions, rootState, updateState, formeName),
