@@ -1,22 +1,21 @@
 # MILESTONE v0.4.0
 
 - [x] Update pipes to async pipes
-- [ ] Add local plugins mechanism
-- [x] Add pice of store actions
+- [x] Add forme actions
 - [ ] Github page
 - [ ] Add examples
 - [x] Update pipes tests to async
 - [ ] Extend and update README
 - [ ] Create discord group
 - [x] Add test coverage
-- [ ] Add pice of store actions test
+- [ ] Add forme actions test
 - [x] Fix middlewares/upgrades tests amount
 - [x] Add bundle size counters
 - [ ] Add issue template
 - [ ] Add pr template
 - [ ] Add contributing guide
 - [ ] Add devtools test
-- [ ] Add create pice of store factory
+- [x] Add forme factory
 - [ ] Add plugins tests
 - [ ] Add factory tests
 - [x] Rewrite whole code to new types

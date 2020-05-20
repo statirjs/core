@@ -7,6 +7,7 @@
 5. Added pice of store actions
 6. Added createForme tests
 7. Extracted promise payload type from pipe
+8. Added forme factory
 
 # 0.3.2 (May 11, 2020)
 
