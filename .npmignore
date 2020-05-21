@@ -20,6 +20,7 @@ babel.config.json
 jest.config.js
 rollup.config.js
 tsconfig.json
+.size-limit.json
 ROADMAP.md
 CHANGELOG.md
 AUTHORS.md

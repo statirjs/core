@@ -48,7 +48,7 @@
 - [x] Add store middlewares test
 - [x] Redesign logo to black bordered
 - [x] Create index.d.ts bundler script
-- [x] Update to version 00.03.00
+- [x] Update to version 0.3.0
 
 # MILESTONE №1 (April 12, 2020 - April 19, 2020)
 
