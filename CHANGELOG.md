@@ -1,4 +1,4 @@
-# Dev
+# 00.04.00 (May 21, 2020)
 
 1. Fixed middlewares/upgrades tests amount
 2. Added test coverage
@@ -13,11 +13,11 @@
 11. Added devtools test
 12. Added forme actions test
 
-# 0.3.2 (May 11, 2020)
+# 00.03.02 (May 11, 2020)
 
 1. Added bundle size counters
 
-# 0.3.0 (May 11, 2020)
+# 00.03.00 (May 11, 2020)
 
 1. Added store config test
 2. Added pice config test
@@ -34,7 +34,7 @@
 13. Created index.d.ts bundler script
 14. Update logo to black bordered
 
-# 0.2.4 (May 5, 2020)
+# 00.02.04 (May 5, 2020)
 
 1. Added dev/prod rollup config
 2. Added prod minification
@@ -43,13 +43,13 @@
 5. Added umd output
 6. Added index.d.ts
 
-# 0.2.1 (May 5, 2020)
+# 00.02.01 (May 5, 2020)
 
 1. Added createPiceOfStore
 2. Added createStore
 3. Added redux-devtools
 
-# 0.2.0 (April 19, 2020)
+# 00.02.00 (April 19, 2020)
 
 1. Tests initiated
 2. Added logo
@@ -60,12 +60,12 @@
 7. Added auto publish on dev
 8. Added cjs output
 
-# 0.1.4 (April 17, 2020)
+# 00.01.04 (April 17, 2020)
 
 1. Rollup initiated
 2. Babel initiated
 
-# 0.1.3 (April 12, 2020)
+# 00.01.03 (April 12, 2020)
 
 1. Metadata files initiated
 2. Npm initiated
