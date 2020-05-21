@@ -1,4 +1,4 @@
-# MILESTONE v0.4.0
+# MILESTONE №3
 
 - [x] Update pipes to async pipes
 - [x] Add forme actions
@@ -8,21 +8,21 @@
 - [ ] Extend and update README
 - [ ] Create discord group
 - [x] Add test coverage
-- [ ] Add forme actions test
+- [x] Add forme actions test
 - [x] Fix middlewares/upgrades tests amount
 - [x] Add bundle size counters
 - [ ] Add issue template
 - [ ] Add pr template
 - [ ] Add contributing guide
-- [ ] Add devtools test
+- [x] Add devtools test
 - [x] Add forme factory
-- [ ] Add plugins tests
-- [ ] Add factory tests
+- [x] Add factory tests
 - [x] Rewrite whole code to new types
-- [ ] Reweite whole tests
+- [x] Reweite whole tests
 - [x] Extract promise payload type from pipe
+- [x] Update to version 00.04.00
 
-# MILESTONE v0.3.0
+# MILESTONE №2
 
 - [x] Add createPiceOfStore
 - [x] Add createStore
@@ -48,8 +48,9 @@
 - [x] Add store middlewares test
 - [x] Redesign logo to black bordered
 - [x] Create index.d.ts bundler script
+- [x] Update to version 00.03.00
 
-# MILESTONE v0.2.0
+# MILESTONE №1
 
 - [x] Create project logo
 - [x] Add rollup bundler
