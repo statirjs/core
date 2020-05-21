@@ -1,4 +1,4 @@
-# MILESTONE №3
+# MILESTONE №3 (May 11, 2020 - today)
 
 - [x] Update pipes to async pipes
 - [x] Add forme actions
@@ -20,9 +20,9 @@
 - [x] Rewrite whole code to new types
 - [x] Reweite whole tests
 - [x] Extract promise payload type from pipe
-- [x] Update to version 00.04.00
+- [x] Update to version 0.4.0
 
-# MILESTONE №2
+# MILESTONE №2 (April 19, 2020 - May 11, 2020)
 
 - [x] Add createPiceOfStore
 - [x] Add createStore
@@ -50,7 +50,7 @@
 - [x] Create index.d.ts bundler script
 - [x] Update to version 00.03.00
 
-# MILESTONE №1
+# MILESTONE №1 (April 12, 2020 - April 19, 2020)
 
 - [x] Create project logo
 - [x] Add rollup bundler
