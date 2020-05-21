@@ -1,5 +1,6 @@
 import * as S from '../typing/internal';
 import { reduxDevtoolsUpgrade } from '../upgrades/devtool';
+import { warning } from '../utils/warning';
 
 // Create Store
 
@@ -54,7 +55,8 @@ export function updateDispatch<T extends S.ReFormeBuilders>(
 // Parse Middlewares
 
 export function createMiddlewareTail<T extends S.RootState>(
-  rootState: T
+  rootState: T,
+  listeners: S.Listener[]
 ): S.UpdateState {
   return function ({ state, formeName }: S.Update) {
     const nextState = {
@@ -63,14 +65,17 @@ export function createMiddlewareTail<T extends S.RootState>(
     };
 
     Object.assign(rootState, nextState);
+
+    listeners.forEach((listener) => listener(rootState));
   };
 }
 
 export function applyMiddlewares<T extends S.RootState>(
   middlewares: S.Middlewares = [],
-  rootState: T
+  rootState: T,
+  listeners: S.Listener[]
 ): S.UpdateState {
-  const middlewareTail = createMiddlewareTail(rootState);
+  const middlewareTail = createMiddlewareTail(rootState, listeners);
   return middlewares.reduce((acc, next) => next(acc), middlewareTail);
 }
 
@@ -80,15 +85,19 @@ export function upgradeTail<T extends S.ReFormeBuilders>(
   config: S.Config<T>
 ): S.Store {
   const rootState = extractState(config.forms);
-  const updateState = applyMiddlewares(config.middlewares, rootState);
   const store = createBlankStore(rootState);
+  const updateState = applyMiddlewares(
+    config.middlewares,
+    rootState,
+    store.listeners
+  );
   updateDispatch(config.forms, store, updateState);
   return store;
 }
 
 export function applyUpgrades(upgrades: S.Upgrades = []): S.CreateStore {
-  const defaultUpgrades = [reduxDevtoolsUpgrade, ...upgrades];
-  return defaultUpgrades.reduce((acc, next) => next(acc), upgradeTail);
+  const baseUpgrades = [reduxDevtoolsUpgrade, ...upgrades];
+  return baseUpgrades.reduce((acc, next) => next(acc), upgradeTail);
 }
 
 // Init Store
@@ -96,6 +105,8 @@ export function applyUpgrades(upgrades: S.Upgrades = []): S.CreateStore {
 export function initStore<T extends S.ReFormeBuilders>(
   config: S.Config<T>
 ): S.Store {
+  warning([[typeof config.forms !== 'object', 'Forms must be a object']]);
+
   const createStore = applyUpgrades(config.upgrades);
   return createStore(config);
 }
