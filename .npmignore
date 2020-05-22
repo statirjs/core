@@ -5,6 +5,7 @@ logo
 node_modules
 scripts
 coverage
+.github
 
 # FILES
 .DB_Store

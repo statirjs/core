@@ -4,6 +4,7 @@ dist
 types
 node_modules
 coverage
+.github
 
 # FILES
 index.d.ts

@@ -6,12 +6,12 @@
 - [ ] Add examples
 - [x] Update pipes tests to async
 - [ ] Extend and update README
-- [ ] Create discord group
+- [x] Create discord group
 - [x] Add test coverage
 - [x] Add forme actions test
 - [x] Fix middlewares/upgrades tests amount
 - [x] Add bundle size counters
-- [ ] Add issue template
+- [x] Add issue template
 - [ ] Add pr template
 - [ ] Add contributing guide
 - [x] Add devtools test

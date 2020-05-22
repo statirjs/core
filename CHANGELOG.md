@@ -1,3 +1,8 @@
+# Dev
+
+1. Created discord group
+2. Added issue template
+
 # 0.4.0 (May 21, 2020)
 
 1. Fixed middlewares/upgrades tests amount
