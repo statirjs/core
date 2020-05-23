@@ -22,7 +22,7 @@ Community [DISCORD](https://discord.gg/mypB55)
 
 [ROADMAP](https://github.com/statirjs/core/blob/dev/ROADMAP.md)
 
-## Change Log
+## Change log
 
 [CHANGELOG](https://github.com/statirjs/core/blob/dev/CHANGELOG.md)
 

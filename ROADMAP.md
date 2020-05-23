@@ -1,3 +1,7 @@
+# MILESTONE №4
+
+- [ ] Add utility forme to present pipes loading/error state
+
 # MILESTONE №3 (May 11, 2020 - today)
 
 - [x] Update pipes to async pipes
