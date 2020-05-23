@@ -1,8 +1,3 @@
----
-name: 🐞 Bug fix or new feature
-about: Fixing a problem with Statirjs
----
-
 ## Pull request type
 
 **1. Does this PR add a new _feature_, or fix a _bug_?**

@@ -4,6 +4,7 @@
 - [x] Add forme actions
 - [ ] Github page
 - [ ] Add examples
+- [ ] Add docs
 - [x] Update pipes tests to async
 - [ ] Extend and update README
 - [x] Create discord group
@@ -12,7 +13,7 @@
 - [x] Fix middlewares/upgrades tests amount
 - [x] Add bundle size counters
 - [x] Add issue template
-- [ ] Add pr template
+- [x] Add pr template
 - [ ] Add contributing guide
 - [x] Add devtools test
 - [x] Add forme factory

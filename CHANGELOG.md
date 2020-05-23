@@ -2,6 +2,7 @@
 
 1. Created discord group
 2. Added issue template
+3. Added pr template
 
 # 0.4.0 (May 21, 2020)
 
