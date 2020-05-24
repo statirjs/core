@@ -26,6 +26,10 @@ Community [DISCORD](https://discord.gg/mypB55)
 
 [CHANGELOG](https://github.com/statirjs/core/blob/dev/CHANGELOG.md)
 
+## Authors
+
+[AUTHORS](https://github.com/statirjs/core/blob/dev/AUTHORS.md)
+
 ## License
 
 [MIT](https://github.com/statirjs/core/blob/dev/LICENSE.md)
