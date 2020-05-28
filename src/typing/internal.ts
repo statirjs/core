@@ -1,5 +1,3 @@
-// Global types
-
 declare global {
   interface ReduxDevtoolsExtenstionInstance {
     init(state: any): void;
@@ -14,8 +12,6 @@ declare global {
     __REDUX_DEVTOOLS_EXTENSION__?: ReduxDevtoolsExtenstion;
   }
 }
-
-// Common types
 
 export type State = any;
 export type Payload = any;
@@ -50,8 +46,6 @@ export interface Update<T extends State = State> {
 }
 
 export type UpdateState<T extends State = State> = (update: Update<T>) => void;
-
-// Forme types
 
 export interface Pipe<T extends State = State> {
   push(state: T, payload: Payload): Promise<T> | T;
@@ -198,13 +192,9 @@ export interface ReFormeBuilder<
 
 export type ReFormeBuilders = Record<string, ReFormeBuilder>;
 
-// Forme factory types
-
 export type Plugin = (customForme: CustomForme) => CustomForme;
 
 export type ReFactory = (customForme: CustomForme) => ReFormeBuilder;
-
-// Store types
 
 export type Middleware<T extends State = State> = (
   next: UpdateState<T>

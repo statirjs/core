@@ -1,8 +1,6 @@
 import * as S from '../typing/internal';
 import { warning } from '../utils/warning';
 
-// Parse Pipes
-
 export function defaultPipeAction<T extends S.State>(state: T): T {
   return state;
 }
@@ -59,8 +57,6 @@ export function parsePipes<T extends S.Pipes>(
   );
 }
 
-// Parse Actions
-
 export function parseAction<T extends S.Action>(
   action: T,
   rootState: S.RootState,
@@ -89,8 +85,6 @@ export function parseActions<T extends S.Actions>(
     {}
   );
 }
-
-// Cerate Forme
 
 export function createForme<T extends S.State, K extends S.Forme<T>>(
   formeState: T,

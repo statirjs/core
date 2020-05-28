@@ -2,8 +2,6 @@ import * as S from '../typing/internal';
 import { reduxDevtoolsUpgrade } from '../upgrades/devtool';
 import { warning } from '../utils/warning';
 
-// Create Store
-
 export function extractState<T extends S.ReFormeBuilders>(
   forms: T
 ): S.RootState {
@@ -52,8 +50,6 @@ export function updateDispatch<T extends S.ReFormeBuilders>(
   Object.assign(store.dispatch, dispatch);
 }
 
-// Parse Middlewares
-
 export function createMiddlewareTail<T extends S.RootState>(
   rootState: T,
   listeners: S.Listener[]
@@ -79,8 +75,6 @@ export function applyMiddlewares<T extends S.RootState>(
   return middlewares.reduce((acc, next) => next(acc), middlewareTail);
 }
 
-// Parse Upgrades
-
 export function upgradeTail<T extends S.ReFormeBuilders>(
   config: S.Config<T>
 ): S.Store {
@@ -99,8 +93,6 @@ export function applyUpgrades(upgrades: S.Upgrades = []): S.CreateStore {
   const baseUpgrades = [reduxDevtoolsUpgrade, ...upgrades];
   return baseUpgrades.reduce((acc, next) => next(acc), upgradeTail);
 }
-
-// Init Store
 
 export function initStore<T extends S.ReFormeBuilders>(
   config: S.Config<T>

@@ -4,7 +4,7 @@
 [![npm version](https://img.shields.io/npm/v/@statirjs/core)](https://www.npmjs.com/package/@statirjs/core)
 [![npm bundle size](https://badgen.net/bundlephobia/minzip/@statirjs/core?label=gzip)](https://bundlephobia.com/result?p=@statirjs/core@0.4.0)
 [![Coverage Status](https://coveralls.io/repos/github/statirjs/core/badge.svg?branch=dev&service=github)](https://coveralls.io/github/statirjs/core?branch=dev&service=github)
-[![Discord](https://img.shields.io/discord/713451221901508720?label=discord)](https://discord.gg/mypB55)
+[![Discord](https://img.shields.io/discord/713451221901508720?label=discord)](https://discord.gg/9kezggD)
 
 "@statirjs/core" is a minimalistic, framework/platform agnostic state manager
 
