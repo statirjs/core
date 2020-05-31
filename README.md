@@ -6,7 +6,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/statirjs/core/badge.svg?branch=dev&service=github)](https://coveralls.io/github/statirjs/core?branch=dev&service=github)
 [![Discord](https://img.shields.io/discord/713451221901508720?label=discord)](https://discord.gg/9kezggD)
 
-"@statirjs/core" is a minimalistic, framework/platform agnostic state manager
+**"@statirjs/core"** is a minimalistic, framework/platform agnostic state manager
 
 ## How to install?
 
@@ -25,7 +25,7 @@ npm i @statirjs/core
 
 ## Homepage
 
-[HOMEPAGE](https://statirjs.github.io/page/#/content/core/home)
+[**HOMEPAGE**](https://statirjs.github.io/page/#/content/core/home)
 
 ## Docs index
 
@@ -38,16 +38,16 @@ npm i @statirjs/core
 
 ## Discord
 
-Community [DISCORD](https://discord.gg/mypB55)
+Community [**DISCORD**](https://discord.gg/mypB55)
 
 ## Roadmap
 
-[ROADMAP](https://github.com/statirjs/core/blob/dev/ROADMAP.md)
+[**ROADMAP**](https://github.com/statirjs/core/blob/dev/ROADMAP.md)
 
 ## Authors
 
-[AUTHORS](https://github.com/statirjs/core/blob/dev/AUTHORS.md)
+[**AUTHORS**](https://github.com/statirjs/core/blob/dev/AUTHORS.md)
 
 ## License
 
-[MIT](https://github.com/statirjs/core/blob/dev/LICENSE.md)
+[**MIT**](https://github.com/statirjs/core/blob/dev/LICENSE.md)
