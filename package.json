@@ -43,7 +43,7 @@
   "bugs": {
     "url": "https://github.com/statirjs/core/issues"
   },
-  "homepage": "https://statirjs.github.io/page/",
+  "homepage": "https://statirjs.github.io/page/#/content/core/home",
   "devDependencies": {
     "@rollup/plugin-typescript": "^4.1.1",
     "@size-limit/preset-small-lib": "^4.5.0",
