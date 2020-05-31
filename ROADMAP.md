@@ -1,16 +1,18 @@
 # MILESTONE №4
 
 - [ ] Add utility forme to present pipes loading/error state
+- [ ] Add plugins
+- [ ] Add plugins tests
+- [ ] Edit pull request template
+- [ ] Delete changelog
+- [ ] Replace logo url
 
-# MILESTONE №3 (May 11, 2020 - today)
+# MILESTONE №3 (May 11, 2020 - May 31, 2020)
 
 - [x] Update pipes to async pipes
 - [x] Add forme actions
-- [ ] Github page
-- [ ] Add examples
-- [ ] Add docs
 - [x] Update pipes tests to async
-- [ ] Extend and update README
+- [x] Extend and update README
 - [x] Create discord group
 - [x] Add test coverage
 - [x] Add forme actions test
@@ -18,7 +20,6 @@
 - [x] Add bundle size counters
 - [x] Add issue template
 - [x] Add pr template
-- [ ] Add contributing guide
 - [x] Add devtools test
 - [x] Add forme factory
 - [x] Add factory tests

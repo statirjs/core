@@ -14,6 +14,28 @@
 npm i @statirjs/core
 ```
 
+## Advantages
+
+- minimal lines of boilerplates
+- **store** functionality splitted in simple and atomic units called **forms**
+- flexible **upgrades**/**middlewares** mechanism
+- built-in [**redux-devtool**](https://github.com/reduxjs/redux-devtools)
+- small size ([**~2.2 KB**](https://bundlephobia.com/result?p=@statirjs/core@0.4.0))
+- working on all js platforms/frameworks
+
+## Homepage
+
+[HOMEPAGE](https://statirjs.github.io/page/#/content/core/home)
+
+## Docs index
+
+- [**Quick start**](https://statirjs.github.io/page/#/content/core/quick_start)
+- [**Forms**](https://statirjs.github.io/page/#/content/core/forms)
+- [**Store**](https://statirjs.github.io/page/#/content/core/store)
+- [**Middlewares**](https://statirjs.github.io/page/#/content/core/middlewares)
+- [**Upgrades**](https://statirjs.github.io/page/#/content/core/upgrades)
+- [**Contributing guide**](https://statirjs.github.io/page/#/content/core/contributing_guide)
+
 ## Discord
 
 Community [DISCORD](https://discord.gg/mypB55)
@@ -21,10 +43,6 @@ Community [DISCORD](https://discord.gg/mypB55)
 ## Roadmap
 
 [ROADMAP](https://github.com/statirjs/core/blob/dev/ROADMAP.md)
-
-## Change log
-
-[CHANGELOG](https://github.com/statirjs/core/blob/dev/CHANGELOG.md)
 
 ## Authors
 

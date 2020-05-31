@@ -17,7 +17,6 @@ export type State = any;
 export type Payload = any;
 export type RootState = any;
 export type Dispatch = any;
-export type CustomForme = any;
 export type Data = any;
 
 export enum ReFormeBuilderFields {
@@ -191,10 +190,6 @@ export interface ReFormeBuilder<
 }
 
 export type ReFormeBuilders = Record<string, ReFormeBuilder>;
-
-export type Plugin = (customForme: CustomForme) => CustomForme;
-
-export type ReFactory = (customForme: CustomForme) => ReFormeBuilder;
 
 export type Middleware<T extends State = State> = (
   next: UpdateState<T>
