@@ -7,13 +7,24 @@ export function formateReduxDevtoolsActionName({
   return `${formeName}/${actionName}`;
 }
 
+export function mergeRootState(update: S.Update) {
+  const rootState = update?.rootState || {};
+  const state = update?.state || {};
+  const formeName = update?.formeName || '';
+  return {
+    ...rootState,
+    ...{ [formeName]: state }
+  };
+}
+
 export function createReduxDevtoolsMiddleware(
   devtools: ReduxDevtoolsExtenstionInstance
 ): S.Middleware {
   return function (next: S.UpdateState): S.UpdateState {
     return function (update: S.Update) {
       const actionName = formateReduxDevtoolsActionName(update);
-      devtools.send(actionName, update.rootState);
+      const nextStoreState = mergeRootState(update);
+      devtools.send(actionName, nextStoreState);
       next(update);
     };
   };

@@ -24,7 +24,7 @@ describe('Test createReduxDevtoolsMiddleware', () => {
       send
     } as any)(() => {})({
       state: {
-        test: 1
+        test: 2
       },
       rootState: {
         formeTest: {
@@ -39,7 +39,7 @@ describe('Test createReduxDevtoolsMiddleware', () => {
 
     expect(mock[0][1]).toEqual({
       formeTest: {
-        test: 1
+        test: 2
       }
     });
   });
@@ -51,7 +51,7 @@ describe('Test createReduxDevtoolsMiddleware', () => {
       send() {}
     } as any)(next)({
       state: {
-        test: 1
+        test: 2
       },
       rootState: {
         formeTest: {
@@ -66,7 +66,7 @@ describe('Test createReduxDevtoolsMiddleware', () => {
 
     expect(mock[0][0]).toEqual({
       state: {
-        test: 1
+        test: 2
       },
       rootState: {
         formeTest: {
