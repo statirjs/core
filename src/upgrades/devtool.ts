@@ -13,7 +13,7 @@ export function createReduxDevtoolsMiddleware(
   return function (next: S.UpdateState): S.UpdateState {
     return function (update: S.Update) {
       const actionName = formateReduxDevtoolsActionName(update);
-      devtools.send(actionName, update.state);
+      devtools.send(actionName, update.rootState);
       next(update);
     };
   };

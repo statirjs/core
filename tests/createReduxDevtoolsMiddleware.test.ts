@@ -38,11 +38,13 @@ describe('Test createReduxDevtoolsMiddleware', () => {
     const mock = send.mock.calls as any;
 
     expect(mock[0][1]).toEqual({
-      test: 1
+      formeTest: {
+        test: 1
+      }
     });
   });
 
-  test('send call', () => {
+  test('next call', () => {
     const next = jest.fn(() => {});
 
     createReduxDevtoolsMiddleware({

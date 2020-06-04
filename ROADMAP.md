@@ -6,6 +6,8 @@
 - [ ] Edit pull request template
 - [ ] Delete changelog
 - [ ] Replace logo url
+- [ ] Fix devtools showing state
+- [ ] Disable devtool in prod
 
 # MILESTONE №3 (May 11, 2020 - May 31, 2020)
 
