@@ -35,7 +35,7 @@ describe('Test applyUpgrades', () => {
         (next: any) => (config: any) => next(config),
         (next: any) => (config: any) => next(config)
       ])({
-        forms: {
+        formes: {
           testForme
         }
       }).state.testForme.test
@@ -68,7 +68,7 @@ describe('Test applyUpgrades', () => {
           throw new Error('test error');
         }
       ])({
-        forms: {
+        formes: {
           testForme
         }
       })
@@ -113,7 +113,7 @@ describe('Test applyUpgrades', () => {
         });
       }
     ])({
-      forms: {
+      formes: {
         testForme
       }
     });

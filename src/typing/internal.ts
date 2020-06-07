@@ -208,7 +208,7 @@ export type Upgrade<T extends ReFormeBuilders = ReFormeBuilders> = (
 export type Upgrades = Upgrade[];
 
 export interface Config<T extends ReFormeBuilders = ReFormeBuilders> {
-  forms: T;
+  formes: T;
   upgrades?: Upgrades;
   middlewares?: Middlewares;
 }

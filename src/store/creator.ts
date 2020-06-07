@@ -3,12 +3,12 @@ import { reduxDevtoolsUpgrade } from '../upgrades/devtool';
 import { warning } from '../utils/warning';
 
 export function extractState<T extends S.ReFormeBuilders>(
-  forms: T
+  formes: T
 ): S.RootState {
-  return Object.keys(forms).reduce(
+  return Object.keys(formes).reduce(
     (acc, next) => ({
       ...acc,
-      [next]: forms[next].state
+      [next]: formes[next].state
     }),
     {}
   );
@@ -26,12 +26,12 @@ export function createBlankStore<T extends S.RootState>(rootState: T): S.Store {
 }
 
 export function updateDispatch<T extends S.ReFormeBuilders>(
-  forms: T,
+  formes: T,
   store: S.Store,
   updateState: S.UpdateState
 ) {
-  const dispatch = Object.keys(forms).reduce((acc, next) => {
-    const { actions, pipes } = forms[next].getForme(
+  const dispatch = Object.keys(formes).reduce((acc, next) => {
+    const { actions, pipes } = formes[next].getForme(
       store.state,
       store.dispatch,
       updateState,
@@ -78,14 +78,14 @@ export function applyMiddlewares<T extends S.RootState>(
 export function upgradeTail<T extends S.ReFormeBuilders>(
   config: S.Config<T>
 ): S.Store {
-  const rootState = extractState(config.forms);
+  const rootState = extractState(config.formes);
   const store = createBlankStore(rootState);
   const updateState = applyMiddlewares(
     config.middlewares,
     rootState,
     store.listeners
   );
-  updateDispatch(config.forms, store, updateState);
+  updateDispatch(config.formes, store, updateState);
   return store;
 }
 
@@ -97,7 +97,7 @@ export function applyUpgrades(upgrades: S.Upgrades = []): S.CreateStore {
 export function initStore<T extends S.ReFormeBuilders>(
   config: S.Config<T>
 ): S.Store {
-  warning([[typeof config.forms !== 'object', 'Forms must be a object']]);
+  warning([[typeof config.formes !== 'object', 'Formes must be a object']]);
 
   const createStore = applyUpgrades(config.upgrades);
   return createStore(config);

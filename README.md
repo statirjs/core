@@ -17,7 +17,7 @@ npm i @statirjs/core
 ## Advantages
 
 - minimal lines of boilerplates
-- **store** functionality splitted in simple and atomic units called **forms**
+- **store** functionality splitted in simple and atomic units called **formes**
 - flexible **upgrades**/**middlewares** mechanism
 - built-in [**redux-devtool**](https://github.com/reduxjs/redux-devtools)
 - small size ([**~2.2 KB**](https://bundlephobia.com/result?p=@statirjs/core@0.4.0))
@@ -30,7 +30,7 @@ npm i @statirjs/core
 ## Docs index
 
 - [**Quick start**](https://statirjs.github.io/page/#/content/core/quick_start)
-- [**Forms**](https://statirjs.github.io/page/#/content/core/forms)
+- [**Formes**](https://statirjs.github.io/page/#/content/core/formes)
 - [**Store**](https://statirjs.github.io/page/#/content/core/store)
 - [**Middlewares**](https://statirjs.github.io/page/#/content/core/middlewares)
 - [**Upgrades**](https://statirjs.github.io/page/#/content/core/upgrades)

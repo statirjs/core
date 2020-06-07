@@ -28,7 +28,7 @@ describe('Test reduxDevtoolsUpgrade', () => {
     );
 
     reduxDevtoolsUpgrade(next as any)({
-      forms: {
+      formes: {
         testForme
       }
     });
@@ -38,7 +38,7 @@ describe('Test reduxDevtoolsUpgrade', () => {
     expect(mock.length).toEqual(1);
 
     expect(mock[0][0]).toEqual({
-      forms: {
+      formes: {
         testForme
       }
     });

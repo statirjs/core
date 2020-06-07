@@ -7,7 +7,7 @@ describe('Test upgradeTail', () => {
 
     expect(() =>
       upgradeTail({
-        forms: {}
+        formes: {}
       })
     ).not.toThrow();
   });
@@ -15,13 +15,13 @@ describe('Test upgradeTail', () => {
   test('return value', () => {
     expect(
       upgradeTail({
-        forms: {}
+        formes: {}
       }).state
     ).toEqual({});
 
     expect(
       upgradeTail({
-        forms: {
+        formes: {
           testForme: {
             state: {
               test: 1
@@ -36,13 +36,13 @@ describe('Test upgradeTail', () => {
 
     expect(
       upgradeTail({
-        forms: {}
+        formes: {}
       }).dispatch
     ).toEqual({});
 
     expect(
       upgradeTail({
-        forms: {}
+        formes: {}
       }).listeners
     ).toEqual([]);
   });
@@ -50,7 +50,7 @@ describe('Test upgradeTail', () => {
   test('state save', () => {
     expect(
       upgradeTail({
-        forms: {
+        formes: {
           testForme: {
             state: {
               test: 2
@@ -86,7 +86,7 @@ describe('Test upgradeTail', () => {
     );
 
     const store = upgradeTail({
-      forms: {
+      formes: {
         testForme
       }
     });
@@ -120,7 +120,7 @@ describe('Test upgradeTail', () => {
     );
 
     const store = upgradeTail({
-      forms: {
+      formes: {
         testForme
       }
     });

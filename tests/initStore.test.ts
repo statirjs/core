@@ -6,20 +6,20 @@ describe('Test initStore', () => {
 
     expect(() =>
       initStore({
-        forms: 1
+        formes: 1
       } as any)
-    ).toThrow('Forms must be a object');
+    ).toThrow('Formes must be a object');
 
     expect(() =>
       initStore({
-        forms: {},
+        formes: {},
         middlewares: 1
       } as any)
     ).toThrow();
 
     expect(() =>
       initStore({
-        forms: {},
+        formes: {},
         upgrades: 1
       } as any)
     ).toThrow();
