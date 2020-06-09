@@ -1,5 +1,6 @@
 import * as S from '../typing/internal';
 import { reduxDevtoolsUpgrade } from '../upgrades/devtool';
+import { initerForme, INITER_FORME, INITER_ACTION } from '../formes/initer';
 import { warning } from '../utils/warning';
 
 export function extractState<T extends S.ReFormeBuilders>(
@@ -94,11 +95,27 @@ export function applyUpgrades(upgrades: S.Upgrades = []): S.CreateStore {
   return baseUpgrades.reduce((acc, next) => next(acc), upgradeTail);
 }
 
-export function initStore<T extends S.ReFormeBuilders>(
+export function mergeIniter<T extends S.ReFormeBuilders>(
   config: S.Config<T>
-): S.Store {
-  warning([[typeof config.formes !== 'object', 'Formes must be a object']]);
+): S.Config<T> {
+  return {
+    ...config,
+    formes: {
+      ...config.formes,
+      [INITER_FORME]: initerForme
+    }
+  };
+}
 
+export function initStore<T extends S.ReFormeBuilders>(
+  initConfig: S.Config<T>
+): S.Store {
+  warning([[typeof initConfig.formes !== 'object', 'Formes must be a object']]);
+
+  const config = mergeIniter(initConfig);
   const createStore = applyUpgrades(config.upgrades);
-  return createStore(config);
+  const store = createStore(config);
+  store.dispatch[INITER_FORME][INITER_ACTION]();
+
+  return store;
 }

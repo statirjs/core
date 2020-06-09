@@ -6,5 +6,5 @@ export declare function createForme<T extends S.State, K extends S.Forme<T>>(
 ): S.ReFormeBuilder<T, K>;
 
 export declare function initStore<T extends S.ReFormeBuilders>(
-  config: S.Config<T>
+  initConfig: S.Config<T>
 ): S.Store<T>;

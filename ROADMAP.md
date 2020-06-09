@@ -8,6 +8,8 @@
 - [ ] Replace logo url
 - [x] Fix devtools showing state
 - [ ] Disable devtool in prod
+- [x] Add initer forme
+- [ ] Add initer tests
 
 # MILESTONE №3 (May 11, 2020 - May 31, 2020)
 
