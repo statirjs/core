@@ -2,9 +2,9 @@ import { applyMiddlewares } from '../src/store/creator';
 
 describe('Test applyMiddlewares', () => {
   test('invalid params', () => {
-    expect(() => applyMiddlewares(null as any, null as any, [])).toThrow();
+    expect(() => applyMiddlewares(null as any, null as any)).toThrow();
 
-    expect(() => applyMiddlewares([], {}, [])).not.toThrow();
+    expect(() => applyMiddlewares([], {} as any)).not.toThrow();
   });
 
   test('return value', () => {
@@ -15,11 +15,14 @@ describe('Test applyMiddlewares', () => {
         (next: any) => (update: any) => next(update)
       ],
       {
-        forme: {
-          test: 1
-        }
-      },
-      []
+        state: {
+          forme: {
+            test: 1
+          }
+        },
+        listeners: [],
+        counter: 0
+      } as any
     );
 
     expect(
@@ -39,11 +42,15 @@ describe('Test applyMiddlewares', () => {
   });
 
   test('state save', () => {
-    const rootState = {
-      forme: {
-        test: 1
-      }
-    };
+    const store = {
+      state: {
+        forme: {
+          test: 1
+        }
+      },
+      listeners: [],
+      counter: 0
+    } as any;
 
     const updateState = applyMiddlewares(
       [
@@ -51,8 +58,7 @@ describe('Test applyMiddlewares', () => {
         (next: any) => (update: any) => next(update),
         (next: any) => (update: any) => next(update)
       ],
-      rootState,
-      []
+      store
     );
 
     updateState({
@@ -68,7 +74,7 @@ describe('Test applyMiddlewares', () => {
       actionName: 'testActipn'
     });
 
-    expect(rootState.forme.test).toEqual(1);
+    expect(store.state.forme.test).toEqual(1);
 
     updateState({
       state: {
@@ -83,15 +89,19 @@ describe('Test applyMiddlewares', () => {
       actionName: 'testActipn'
     });
 
-    expect(rootState.forme.test).toEqual(2);
+    expect(store.state.forme.test).toEqual(2);
   });
 
   test('side effects', () => {
-    const rootState = {
-      forme: {
-        test: 1
-      }
-    };
+    const store = {
+      state: {
+        forme: {
+          test: 1
+        }
+      },
+      listeners: [],
+      counter: 0
+    } as any;
 
     const updateState = applyMiddlewares(
       [
@@ -101,8 +111,7 @@ describe('Test applyMiddlewares', () => {
           throw new Error('test error');
         }
       ],
-      rootState,
-      []
+      store
     );
 
     expect(() =>
@@ -122,11 +131,15 @@ describe('Test applyMiddlewares', () => {
   });
 
   test('state update', () => {
-    const rootState = {
-      forme: {
-        test: 1
-      }
-    };
+    const store = {
+      state: {
+        forme: {
+          test: 1
+        }
+      },
+      listeners: [],
+      counter: 0
+    } as any;
 
     const updateState = applyMiddlewares(
       [
@@ -148,8 +161,7 @@ describe('Test applyMiddlewares', () => {
             }
           })
       ],
-      rootState,
-      []
+      store
     );
 
     updateState({
@@ -165,6 +177,6 @@ describe('Test applyMiddlewares', () => {
       actionName: 'testActipn'
     });
 
-    expect(rootState.forme.test).toEqual(4);
+    expect(store.state.forme.test).toEqual(4);
   });
 });

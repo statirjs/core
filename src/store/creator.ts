@@ -3,6 +3,10 @@ import { reduxDevtoolsUpgrade } from '../upgrades/devtool';
 import { initerForme, INITER_FORME, INITER_ACTION } from '../formes/initer';
 import { warning } from '../utils/warning';
 
+const COUNTER_INIT = 0;
+
+const COUNTER_INCREMENT = 1;
+
 export function extractState<T extends S.ReFormeBuilders>(
   formes: T
 ): S.RootState {
@@ -20,6 +24,7 @@ export function createBlankStore<T extends S.RootState>(rootState: T): S.Store {
     state: rootState,
     dispatch: {},
     listeners: [],
+    counter: COUNTER_INIT,
     subscribe(listener: S.Listener<T>) {
       this.listeners.push(listener);
     }
@@ -51,28 +56,26 @@ export function updateDispatch<T extends S.ReFormeBuilders>(
   Object.assign(store.dispatch, dispatch);
 }
 
-export function createMiddlewareTail<T extends S.RootState>(
-  rootState: T,
-  listeners: S.Listener[]
-): S.UpdateState {
-  return function ({ state, formeName }: S.Update) {
+export function createMiddlewareTail(store: S.Store): S.UpdateState {
+  return function ({ state, rootState, formeName }: S.Update) {
     const nextState = {
+      ...store.state,
       ...rootState,
       [formeName]: state
     };
 
-    Object.assign(rootState, nextState);
+    Object.assign(store.state, nextState);
 
-    listeners.forEach((listener) => listener(rootState));
+    store.counter += COUNTER_INCREMENT;
+    store.listeners.forEach((listener) => listener(nextState));
   };
 }
 
-export function applyMiddlewares<T extends S.RootState>(
+export function applyMiddlewares(
   middlewares: S.Middlewares = [],
-  rootState: T,
-  listeners: S.Listener[]
+  store: S.Store
 ): S.UpdateState {
-  const middlewareTail = createMiddlewareTail(rootState, listeners);
+  const middlewareTail = createMiddlewareTail(store);
   return middlewares.reduce((acc, next) => next(acc), middlewareTail);
 }
 
@@ -81,11 +84,7 @@ export function upgradeTail<T extends S.ReFormeBuilders>(
 ): S.Store {
   const rootState = extractState(config.formes);
   const store = createBlankStore(rootState);
-  const updateState = applyMiddlewares(
-    config.middlewares,
-    rootState,
-    store.listeners
-  );
+  const updateState = applyMiddlewares(config.middlewares, store);
   updateDispatch(config.formes, store, updateState);
   return store;
 }

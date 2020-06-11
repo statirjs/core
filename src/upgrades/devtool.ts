@@ -22,9 +22,10 @@ export function createReduxDevtoolsMiddleware(
 ): S.Middleware {
   return function (next: S.UpdateState): S.UpdateState {
     return function (update: S.Update) {
+      const payload = update.state;
       const actionName = formateReduxDevtoolsActionName(update);
       const nextStoreState = mergeRootState(update);
-      devtools.send(actionName, nextStoreState);
+      devtools.send({ type: actionName, payload }, nextStoreState);
       next(update);
     };
   };
@@ -38,7 +39,7 @@ export function reduxDevtoolsUpgrade(next: S.CreateStore): S.CreateStore {
 
       const nextConfig: S.Config = {
         ...config,
-        middlewares: [...(config.middlewares || []), middleware]
+        middlewares: [middleware, ...(config.middlewares || [])]
       };
 
       const store = next(nextConfig);

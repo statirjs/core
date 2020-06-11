@@ -2,19 +2,22 @@ import { createMiddlewareTail } from '../src/store/creator';
 
 describe('Test createMiddlewareTail', () => {
   test('invalid params', () => {
-    expect(() => createMiddlewareTail(null as any, [])).not.toThrow();
+    expect(() => createMiddlewareTail(null as any)).not.toThrow();
 
-    expect(() => createMiddlewareTail(null as any, [])({} as any)).toThrow();
+    expect(() => createMiddlewareTail(null as any)({} as any)).toThrow();
   });
 
   test('return value', () => {
-    const rootState = { test: {} };
+    const store = {
+      state: {
+        test: {}
+      },
+      listeners: [],
+      counter: 0
+    } as any;
 
     expect(
-      createMiddlewareTail(
-        rootState,
-        []
-      )({
+      createMiddlewareTail(store)({
         state: {},
         formeName: 'test'
       } as any)
@@ -24,13 +27,17 @@ describe('Test createMiddlewareTail', () => {
   test('listner update', () => {
     const listner = jest.fn(() => {});
 
-    const rootState = {
-      test: {
-        count: 1
-      }
-    };
+    const store = {
+      state: {
+        test: {
+          count: 1
+        }
+      },
+      listeners: [listner],
+      counter: 0
+    } as any;
 
-    createMiddlewareTail(rootState, [listner])({
+    createMiddlewareTail(store)({
       state: {
         count: 2
       },
@@ -43,13 +50,17 @@ describe('Test createMiddlewareTail', () => {
   });
 
   test('state save', () => {
-    const rootState = {
-      forme: {
-        test: 1
-      }
-    };
+    const store = {
+      state: {
+        forme: {
+          test: 1
+        }
+      },
+      listeners: [],
+      counter: 0
+    } as any;
 
-    const updateState = createMiddlewareTail(rootState, []);
+    const updateState = createMiddlewareTail(store);
 
     updateState({
       state: {
@@ -58,7 +69,7 @@ describe('Test createMiddlewareTail', () => {
       formeName: 'forme'
     } as any);
 
-    expect(rootState.forme.test).toEqual(1);
+    expect(store.state.forme.test).toEqual(1);
 
     updateState({
       state: {
@@ -67,6 +78,6 @@ describe('Test createMiddlewareTail', () => {
       formeName: 'forme'
     } as any);
 
-    expect(rootState.forme.test).toEqual(2);
+    expect(store.state.forme.test).toEqual(2);
   });
 });

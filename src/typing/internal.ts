@@ -1,7 +1,7 @@
 declare global {
   interface ReduxDevtoolsExtenstionInstance {
     init(state: any): void;
-    send(name: string, state: any): void;
+    send(name: string | { type: string; payload: any }, state: any): void;
   }
 
   interface ReduxDevtoolsExtenstion {
@@ -235,5 +235,6 @@ export interface Store<
   state: K;
   dispatch: ExtractDispatch<T>;
   listeners: Listeners;
+  counter: number;
   subscribe(listener: Listener<K>): void;
 }
