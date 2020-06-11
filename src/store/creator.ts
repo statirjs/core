@@ -1,6 +1,6 @@
 import * as S from '../typing/internal';
 import { reduxDevtoolsUpgrade } from '../upgrades/devtool';
-import { initerForme, INITER_FORME, INITER_ACTION } from '../formes/initer';
+import { initerForme, INITER_FORME } from '../formes/initer';
 import { warning } from '../utils/warning';
 
 const COUNTER_INIT = 0;
@@ -114,7 +114,5 @@ export function initStore<T extends S.ReFormeBuilders>(
   const config = mergeIniter(initConfig);
   const createStore = applyUpgrades(config.upgrades);
   const store = createStore(config);
-  store.dispatch[INITER_FORME][INITER_ACTION]();
-
   return store;
 }
