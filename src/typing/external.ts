@@ -8,7 +8,3 @@ export declare function createForme<T extends S.State, K extends S.Forme<T>>(
 export declare function initStore<T extends S.ReFormeBuilders>(
   initConfig: S.Config<T>
 ): S.Store<T>;
-
-export declare const INITER_FORME: string;
-
-export declare const INITER_ACTION: string;

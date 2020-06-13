@@ -235,6 +235,5 @@ export interface Store<
   state: K;
   dispatch: ExtractDispatch<T>;
   listeners: Listeners;
-  counter: number;
   subscribe(listener: Listener<K>): void;
 }

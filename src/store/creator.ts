@@ -1,11 +1,6 @@
 import * as S from '../typing/internal';
 import { reduxDevtoolsUpgrade } from '../upgrades/devtool';
-import { initerForme, INITER_FORME } from '../formes/initer';
 import { warning } from '../utils/warning';
-
-const COUNTER_INIT = 0;
-
-const COUNTER_INCREMENT = 1;
 
 export function extractState<T extends S.ReFormeBuilders>(
   formes: T
@@ -24,7 +19,6 @@ export function createBlankStore<T extends S.RootState>(rootState: T): S.Store {
     state: rootState,
     dispatch: {},
     listeners: [],
-    counter: COUNTER_INIT,
     subscribe(listener: S.Listener<T>) {
       this.listeners.push(listener);
     }
@@ -66,7 +60,6 @@ export function createMiddlewareTail(store: S.Store): S.UpdateState {
 
     Object.assign(store.state, nextState);
 
-    store.counter += COUNTER_INCREMENT;
     store.listeners.forEach((listener) => listener(nextState));
   };
 }
@@ -94,24 +87,11 @@ export function applyUpgrades(upgrades: S.Upgrades = []): S.CreateStore {
   return baseUpgrades.reduce((acc, next) => next(acc), upgradeTail);
 }
 
-export function mergeIniter<T extends S.ReFormeBuilders>(
-  config: S.Config<T>
-): S.Config<T> {
-  return {
-    ...config,
-    formes: {
-      ...config.formes,
-      [INITER_FORME]: initerForme
-    }
-  };
-}
-
 export function initStore<T extends S.ReFormeBuilders>(
-  initConfig: S.Config<T>
+  config: S.Config<T>
 ): S.Store {
-  warning([[typeof initConfig.formes !== 'object', 'Formes must be a object']]);
+  warning([[typeof config.formes !== 'object', 'Formes must be a object']]);
 
-  const config = mergeIniter(initConfig);
   const createStore = applyUpgrades(config.upgrades);
   const store = createStore(config);
   return store;

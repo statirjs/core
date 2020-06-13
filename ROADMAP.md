@@ -1,15 +1,16 @@
 # MILESTONE №4 (May 31, 2020 - today)
 
-- [ ] Add utility forme to present pipes loading/error state
 - [ ] Add plugins
 - [ ] Add plugins tests
-- [ ] Edit pull request template
-- [ ] Delete changelog
-- [ ] Replace logo url
+- [x] Edit pull request template
+- [x] Delete changelog
+- [x] Replace logo url
 - [x] Fix devtools showing state
 - [ ] Disable devtool in prod
 - [x] Add initer forme
-- [ ] Add initer tests
+- [ ] Prettify tests
+- [x] Delete counter
+- [x] Delete initer
 
 # MILESTONE №3 (May 11, 2020 - May 31, 2020)
 
