@@ -17,6 +17,7 @@ function getFiles() {
 function getBundledFile(files) {
   return files
     .reduce((acc, next) => acc + next, '')
+    .replace('/// <reference types="react" />', '')
     .replace(/import/g, '\nimport')
     .replace(/export/g, '\nexport');
 }
