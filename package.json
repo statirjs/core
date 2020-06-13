@@ -20,7 +20,7 @@
     "rollup:build": "npx rollup -c",
     "rollup:watch": "npx rollup -c -w",
     "size:check": "npm run rollup:build && npx size-limit",
-    "scripts:types": "node ./scripts/types.js",
+    "scripts:types": "node ./scripts/types.js && npx prettier --write ./index.d.ts",
     "publish:clean": "npx rimraf dist types coverage",
     "publish:coverage": "npm run jest:coverage && npm run coveralls:send",
     "publish:check": "npm run prettier:check && npm run eslint:check && npm run typescript:check && npm run jest:test",
