@@ -11,6 +11,8 @@
 - [ ] Prettify tests
 - [x] Delete counter
 - [x] Delete initer
+- [x] Add updateState disable
+- [x] Add updateState disable tests
 
 # MILESTONE №3 (May 11, 2020 - May 31, 2020)
 

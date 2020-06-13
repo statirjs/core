@@ -51,16 +51,16 @@ export function updateDispatch<T extends S.ReFormeBuilders>(
 }
 
 export function createMiddlewareTail(store: S.Store): S.UpdateState {
-  return function ({ state, rootState, formeName }: S.Update) {
+  return function ({ state, rootState, formeName, disable }: S.Update) {
     const nextState = {
       ...store.state,
       ...rootState,
       [formeName]: state
     };
 
-    Object.assign(store.state, nextState);
+    !disable && Object.assign(store.state, nextState);
 
-    store.listeners.forEach((listener) => listener(nextState));
+    !disable && store.listeners.forEach((listener) => listener(nextState));
   };
 }
 

@@ -42,6 +42,7 @@ export interface Update<T extends State = State> {
   rootState: RootState;
   formeName: string;
   actionName: string;
+  disable?: boolean;
 }
 
 export type UpdateState<T extends State = State> = (update: Update<T>) => void;
