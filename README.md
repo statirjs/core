@@ -6,7 +6,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/statirjs/core/badge.svg?branch=dev&service=github)](https://coveralls.io/github/statirjs/core?branch=dev&service=github)
 [![Discord](https://img.shields.io/discord/713451221901508720?label=discord)](https://discord.gg/9kezggD)
 
-**"@statirjs/core"** is a minimalistic, framework/platform agnostic state manager
+**"@statirjs/core"** is a minimalist, framework/platform agnostic state manager
 
 ## How to install?
 
